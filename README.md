@@ -1,3 +1,3 @@
-# JustTooFast
+# JustTooFast.CodeGen
 
-JustTooFast is an open-source project focusing on libraries and tools for boosting developer productivity.
+JustTooFast.CodeGen is an open-source project focusing on libraries and tools for boosting developer productivity.
