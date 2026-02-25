@@ -1,0 +1,13 @@
+# Build results
+**/[Bb]in/
+**/[Oo]bj/
+
+# Visual Studio / VS Code cache/options directory
+.vs/
+.vscode/
+
+# MSTest test results
+[Tt]est[Rr]esult*/
+
+# Generated files (Scaffolder output)
+**/*.gen.cs
