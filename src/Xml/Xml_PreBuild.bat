@@ -7,6 +7,7 @@ SET projectDir=!projectDir:~1,-1!
 SET targetNamespace=%2
 SET targetNamespace=!targetNamespace:~1,-1!
 @ECHO ON
+if not exist "!projectDir!Output" mkdir "!projectDir!Output"
 del /f /q "!projectDir!Output\*.gen.cs"
 dotnet run --project "!projectDir!..\Scaffolder.Cli\Scaffolder.Cli.csproj" -- "!projectDir!Input" "!projectDir!Output" "!targetNamespace!"
 @ECHO OFF

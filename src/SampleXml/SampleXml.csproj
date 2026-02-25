@@ -27,6 +27,7 @@
   </Target>
 
   <Target Name="PreBuild_unix" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Unix' ">
+    <MakeDir Directories="$(ProjectDir)Output" />
     <Exec Command="rm -f &quot;$(ProjectDir)Output/*.gen.cs&quot;" />
     <Exec Command='dotnet run --project &quot;$(ProjectDir)../Scaffolder.Cli/Scaffolder.Cli.csproj&quot; -- &quot;$(ProjectDir)Input&quot; &quot;$(ProjectDir)Output&quot; &quot;JustTooFast.CodeGen.SampleXml&quot;' />
   </Target>
