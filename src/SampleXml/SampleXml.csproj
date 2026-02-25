@@ -12,16 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
-    <Compile Include="Output\AttributeBuilder.gen.cs" />
-    <Compile Include="Output\AttributeDeclaration.gen.cs" />
-    <Compile Include="Output\AttributeInfo.gen.cs" />
-    <Compile Include="Output\ElementBuilder.gen.cs" />
-    <Compile Include="Output\ElementDeclaration.gen.cs" />
-    <Compile Include="Output\ElementInfo.gen.cs" />
+
+    <!-- Generated files -->
+    <Compile Include="Output\*.gen.cs" />
+
     <Compile Include="AttributeDeclaration.cs" />
     <Compile Include="ElementDeclaration.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
