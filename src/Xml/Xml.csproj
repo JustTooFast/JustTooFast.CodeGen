@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>JustTooFast.CodeGen.Xml</AssemblyName>
+    <RootNamespace>JustTooFast.CodeGen.Xml</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="PrologDeclaration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
+    <Compile Include="Output\AttributeBuilder.gen.cs" />
+    <Compile Include="Output\AttributeDeclaration.gen.cs" />
+    <Compile Include="Output\AttributeInfo.gen.cs" />
+    <Compile Include="Output\ElementBuilder.gen.cs" />
+    <Compile Include="Output\ElementDeclaration.gen.cs" />
+    <Compile Include="Output\ElementInfo.gen.cs" />
+    <Compile Include="Output\RootElementBuilder.gen.cs" />
+    <Compile Include="Output\RootElementDeclaration.gen.cs" />
+    <Compile Include="Output\RootElementInfo.gen.cs" />
+    <Compile Include="Output\PrologBuilder.gen.cs" />
+    <Compile Include="Output\PrologDeclaration.gen.cs" />
+    <Compile Include="Output\PrologInfo.gen.cs" />
+    <Compile Include="Output\XmlBuilder.gen.cs" />
+    <Compile Include="Output\XmlDeclaration.gen.cs" />
+    <Compile Include="Output\XmlFileBuilder.gen.cs" />
+    <Compile Include="Output\XmlFileDeclaration.gen.cs" />
+    <Compile Include="Output\XmlFileInfo.gen.cs" />
+    <Compile Include="Output\XmlInfo.gen.cs" />
+    <Compile Include="Output\XmlSnippetBuilder.gen.cs" />
+    <Compile Include="Output\XmlSnippetDeclaration.gen.cs" />
+    <Compile Include="Output\XmlSnippetInfo.gen.cs" />
+    <Compile Include="Appender.cs" />
+    <Compile Include="AttributeDeclaration.cs" />
+    <Compile Include="DeclarationBase.cs" />
+    <Compile Include="ElementDeclaration.cs" />
+    <Compile Include="Encoding.cs" />
+    <Compile Include="EnumEx.cs" />
+    <Compile Include="IAppender.cs" />
+    <Compile Include="IGenerator.cs" />
+    <Compile Include="RootElementDeclaration.cs" />
+    <Compile Include="Standalone.cs" />
+    <Compile Include="XmlBuilder.cs" />
+    <Compile Include="XmlDeclaration.cs" />
+    <Compile Include="XmlFileBuilder.cs" />
+    <Compile Include="XmlFileBuilderEx.cs" />
+    <Compile Include="XmlFileDeclaration.cs" />
+    <Compile Include="XmlFileGenerator.cs" />
+    <Compile Include="XmlFileInfo.cs" />
+    <Compile Include="XmlFormatException.cs" />
+    <Compile Include="XmlSnippetBuilder.cs" />
+    <Compile Include="XmlSnippetBuilderEx.cs" />
+    <Compile Include="XmlSnippetDeclaration.cs" />
+    <Compile Include="XmlSnippetGenerator.cs" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
+    <Exec Command="call $(ProjectDir)Xml_PreBuild.bat &quot;$(ProjectDir)&quot; &quot;JustTooFast.Xml&quot;" />
+  </Target>
+
+  <Target Name="PreBuild_unix" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Unix' ">
+    <Exec Command="rm -f &quot;$(ProjectDir)Output/*.gen.cs&quot;" />
+    <Exec Command='dotnet run --project &quot;$(ProjectDir)../Scaffolder.Cli/Scaffolder.Cli.csproj&quot; -- &quot;$(ProjectDir)Input&quot; &quot;$(ProjectDir)Output&quot; &quot;JustTooFast.CodeGen.Xml&quot;' />
+  </Target>
+
+</Project>
