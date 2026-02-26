@@ -4,7 +4,7 @@
 namespace JustTooFast.CodeGen.Scaffolder.Tests;
 
 [TestClass]
-public class InfoGeneratorTest
+public class ModelGeneratorTest
 {
     [TestMethod]
     public void Generate_With3Attributes_ReturnAttributes()
@@ -18,7 +18,7 @@ public class InfoGeneratorTest
 @"using System.Collections.Generic;
 
 namespace MyNamespace;
-public partial class TestInfo
+public partial class TestModel
 {
     public string Item1
     { get; set; }
@@ -32,7 +32,7 @@ public partial class TestInfo
 ";
 
         //Act
-        IGenerator target = new InfoGenerator(entity, targetNamespace);
+        IGenerator target = new ModelGenerator(entity, targetNamespace);
         string actual = target.Generate();
 
         //Assert
@@ -51,21 +51,21 @@ public partial class TestInfo
 @"using System.Collections.Generic;
 
 namespace MyNamespace;
-public partial class TestInfo
+public partial class TestModel
 {
-    public Item1Info Item1
+    public Item1Model Item1
     { get; set; }
 
-    public Item2Info Item2
+    public Item2Model Item2
     { get; set; }
 
-    public Item3Info Item3
+    public Item3Model Item3
     { get; set; }
 }
 ";
 
         //Act
-        IGenerator target = new InfoGenerator(entity, targetNamespace);
+        IGenerator target = new ModelGenerator(entity, targetNamespace);
         string actual = target.Generate();
 
         //Assert
@@ -84,7 +84,7 @@ public partial class TestInfo
 @"using System.Collections.Generic;
 
 namespace MyNamespace;
-public partial class TestInfo
+public partial class TestModel
 {
     private readonly List<string> m_Item1s = new();
     private readonly List<string> m_Item2s = new();
@@ -108,7 +108,7 @@ public partial class TestInfo
 ";
 
         //Act
-        IGenerator target = new InfoGenerator(entity, targetNamespace);
+        IGenerator target = new ModelGenerator(entity, targetNamespace);
         string actual = target.Generate();
 
         //Assert
@@ -127,23 +127,23 @@ public partial class TestInfo
 @"using System.Collections.Generic;
 
 namespace MyNamespace;
-public partial class TestInfo
+public partial class TestModel
 {
-    private readonly List<Item1Info> m_Item1s = new();
-    private readonly List<Item2Info> m_Item2s = new();
-    private readonly List<Item3Info> m_Item3s = new();
+    private readonly List<Item1Model> m_Item1s = new();
+    private readonly List<Item2Model> m_Item2s = new();
+    private readonly List<Item3Model> m_Item3s = new();
 
-    public List<Item1Info> Item1s
+    public List<Item1Model> Item1s
     {
         get { return m_Item1s; }
     }
 
-    public List<Item2Info> Item2s
+    public List<Item2Model> Item2s
     {
         get { return m_Item2s; }
     }
 
-    public List<Item3Info> Item3s
+    public List<Item3Model> Item3s
     {
         get { return m_Item3s; }
     }
@@ -151,7 +151,7 @@ public partial class TestInfo
 ";
 
         //Act
-        IGenerator target = new InfoGenerator(entity, targetNamespace);
+        IGenerator target = new ModelGenerator(entity, targetNamespace);
         string actual = target.Generate();
 
         //Assert
@@ -173,15 +173,15 @@ public partial class TestInfo
 @"using System.Collections.Generic;
 
 namespace MyNamespace;
-public partial class Test2Info
+public partial class Test2Model
 {
     private readonly List<string> m_Item3s = new();
-    private readonly List<Item4Info> m_Item4s = new();
+    private readonly List<Item4Model> m_Item4s = new();
 
     public string Item1
     { get; set; }
 
-    public Item2Info Item2
+    public Item2Model Item2
     { get; set; }
 
     public List<string> Item3s
@@ -189,7 +189,7 @@ public partial class Test2Info
         get { return m_Item3s; }
     }
 
-    public List<Item4Info> Item4s
+    public List<Item4Model> Item4s
     {
         get { return m_Item4s; }
     }
@@ -197,7 +197,7 @@ public partial class Test2Info
 ";
 
         //Act
-        IGenerator target = new InfoGenerator(entity, targetNamespace);
+        IGenerator target = new ModelGenerator(entity, targetNamespace);
         string actual = target.Generate();
 
         //Assert

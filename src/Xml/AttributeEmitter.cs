@@ -4,9 +4,9 @@
 using System.Reflection.Metadata.Ecma335;
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class AttributeDeclaration : DeclarationBase
+public partial class AttributeEmitter : EmitterBase
 {
-    public AttributeDeclaration(AttributeInfo attribute, IAppender appender)
+    public AttributeEmitter(AttributeModel attribute, IAppender appender)
         : this(attribute)
     {
         Appender = appender;

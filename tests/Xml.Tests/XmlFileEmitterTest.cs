@@ -4,7 +4,7 @@
 namespace JustTooFast.CodeGen.Xml.Tests;
 
 [TestClass]
-public class XmlFileDeclarationTest
+public class XmlFileEmitterTest
 {
     [TestMethod]
     public void AppendDeclaration_WithRootElement_ReturnWithRootElement()
@@ -19,7 +19,7 @@ public class XmlFileDeclarationTest
 <catalog></catalog>";
 
         //Act
-        XmlFileDeclaration target = new(builder, new Appender());
+        XmlFileEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -43,7 +43,7 @@ public class XmlFileDeclarationTest
 <catalog></catalog>";
 
         //Act
-        XmlFileDeclaration target = new(builder, new Appender());
+        XmlFileEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -68,11 +68,11 @@ public class XmlFileDeclarationTest
         string expected = "<catalog></catalog>";
 
         //Act
-        XmlFileDeclaration target1 = new(builder1, new Appender());
+        XmlFileEmitter target1 = new(builder1, new Appender());
         target1.AppendDeclaration();
         string actual1 = target1.ToString();
 
-        XmlFileDeclaration target2 = new(builder2, new Appender());
+        XmlFileEmitter target2 = new(builder2, new Appender());
         target2.AppendDeclaration();
         string actual2 = target2.ToString();
 
@@ -89,6 +89,6 @@ public class XmlFileDeclarationTest
         XmlFileBuilder builder = new();
 
         //Act
-        XmlFileDeclaration target = new(builder, new Appender());
+        XmlFileEmitter target = new(builder, new Appender());
     }
 }

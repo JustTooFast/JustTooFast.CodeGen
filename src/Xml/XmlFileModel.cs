@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class XmlFileInfo
+public partial class XmlFileModel
 {
     public bool DisableProlog
     { get; set; }

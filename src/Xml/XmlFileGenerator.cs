@@ -6,18 +6,18 @@ using System;
 namespace JustTooFast.CodeGen.Xml;
 public class XmlFileGenerator : IGenerator
 {
-    private readonly XmlFileInfo m_XmlFile;
+    private readonly XmlFileModel m_XmlFile;
 
-    public XmlFileGenerator(XmlFileInfo xmlFile)
+    public XmlFileGenerator(XmlFileModel xmlFile)
     {
         m_XmlFile = xmlFile ?? throw new ArgumentNullException(nameof(xmlFile));
     }
 
     public string Generate()
     {
-        XmlFileDeclaration xmlFileDeclaration = new(m_XmlFile, new Appender());
-        xmlFileDeclaration.AppendDeclaration();
+        XmlFileEmitter xmlFileEmitter = new(m_XmlFile, new Appender());
+        xmlFileEmitter.AppendDeclaration();
 
-        return xmlFileDeclaration.ToString();
+        return xmlFileEmitter.ToString();
     }
 }

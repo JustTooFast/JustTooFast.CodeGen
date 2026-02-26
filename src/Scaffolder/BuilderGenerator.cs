@@ -8,8 +8,8 @@ namespace JustTooFast.CodeGen.Scaffolder;
 
 /// <summary>
 /// Generates a Builder class which is responsible for populating 
-/// data points into an Info object using a method chaining syntax.
-/// <seealso cref="InfoGenerator"/>
+/// data points into a Model object using a method chaining syntax.
+/// <seealso cref="ModelGenerator"/>
 /// </summary>
 public class BuilderGenerator : IGenerator
 {
@@ -46,21 +46,21 @@ public class BuilderGenerator : IGenerator
             .AppendLineFeed($"public partial class {m_Entity.Name}Builder")
             .AppendLineFeed("{");
 
-        //Add info field
-        sb.AppendLineFeed($"    private readonly {m_Entity.Name}Info m_{m_Entity.Name} = new();")
+        //Add model field
+        sb.AppendLineFeed($"    private readonly {m_Entity.Name}Model m_{m_Entity.Name} = new();")
             .AppendLineFeed();
 
         //Add implicit operators
-        sb.AppendLineFeed($"    public static implicit operator {m_Entity.Name}Info({m_Entity.Name}Builder builder)")
+        sb.AppendLineFeed($"    public static implicit operator {m_Entity.Name}Model({m_Entity.Name}Builder builder)")
             .AppendLineFeed("    {")
             .AppendLineFeed($"        return builder.m_{m_Entity.Name};")
             .AppendLineFeed("    }");
 
         sb.AppendLineFeed();
 
-        sb.AppendLineFeed($"    public static implicit operator {m_Entity.Name}Declaration({m_Entity.Name}Builder builder)")
+        sb.AppendLineFeed($"    public static implicit operator {m_Entity.Name}Emitter({m_Entity.Name}Builder builder)")
             .AppendLineFeed("    {")
-            .AppendLineFeed($"        return new {m_Entity.Name}Declaration(builder.m_{m_Entity.Name});")
+            .AppendLineFeed($"        return new {m_Entity.Name}Emitter(builder.m_{m_Entity.Name});")
             .AppendLineFeed("    }");
 
         //Add attributes
@@ -88,7 +88,7 @@ public class BuilderGenerator : IGenerator
 
             string camelCaseEntity = entity.ToLowerFirstLetter();
 
-            sb.AppendLineFeed($"    public {m_Entity.Name}Builder With{entity}({entity}Info {camelCaseEntity})")
+            sb.AppendLineFeed($"    public {m_Entity.Name}Builder With{entity}({entity}Model {camelCaseEntity})")
                 .AppendLineFeed("    {")
                 .AppendLineFeed($"        m_{m_Entity.Name}.{entity} = {camelCaseEntity} ?? throw new ArgumentNullException(nameof({camelCaseEntity}));")
                 .AppendLineFeed()
@@ -144,7 +144,7 @@ public class BuilderGenerator : IGenerator
 
             string camelCaseEntitySet = entitySet.ToLowerFirstLetter();
 
-            sb.AppendLineFeed($"    public {m_Entity.Name}Builder With{entitySet}({entitySet}Info {camelCaseEntitySet})")
+            sb.AppendLineFeed($"    public {m_Entity.Name}Builder With{entitySet}({entitySet}Model {camelCaseEntitySet})")
                 .AppendLineFeed("    {")
                 .AppendLineFeed($"        if ({camelCaseEntitySet} == null)")
                 .AppendLineFeed($"            throw new ArgumentNullException(nameof({camelCaseEntitySet}));")
@@ -167,7 +167,7 @@ public class BuilderGenerator : IGenerator
 
             sb.AppendLineFeed();
 
-            sb.AppendLineFeed($"    public {m_Entity.Name}Builder With{entitySet.ToPlural()}({entitySet}Info[] {camelCaseEntitySet.ToPlural()})")
+            sb.AppendLineFeed($"    public {m_Entity.Name}Builder With{entitySet.ToPlural()}({entitySet}Model[] {camelCaseEntitySet.ToPlural()})")
                 .AppendLineFeed("    {")
                 .AppendLineFeed($"        if ({camelCaseEntitySet.ToPlural()} == null)")
                 .AppendLineFeed($"            throw new ArgumentNullException(nameof({camelCaseEntitySet.ToPlural()}));")

@@ -4,7 +4,7 @@
 namespace JustTooFast.CodeGen.Xml.Tests;
 
 [TestClass]
-public class PrologDeclarationTest
+public class PrologEmitterTest
 {
     [TestMethod]
     public void AppendDeclaration_WithDefaultXml_ReturnXml()
@@ -15,7 +15,7 @@ public class PrologDeclarationTest
         string expected = "<?xml version=\"1.0\"?>";
 
         //Act
-        PrologDeclaration target = new(builder, new Appender());
+        PrologEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -34,7 +34,7 @@ public class PrologDeclarationTest
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
         //Act
-        PrologDeclaration target = new(builder, new Appender());
+        PrologEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 

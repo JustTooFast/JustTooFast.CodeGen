@@ -7,17 +7,17 @@ using System.Text;
 namespace JustTooFast.CodeGen.Scaffolder;
 
 /// <summary>
-/// Generates an Info class which is responsible for holding the
-/// data points that will be used by a Declaration class to 
+/// Generates an Model class which is responsible for holding the
+/// data points that will be used by an Emitter class to 
 /// generate code.
-/// <seealso cref="DeclarationGenerator"/>
+/// <seealso cref="EmitterGenerator"/>
 /// </summary>
-public class InfoGenerator : IGenerator
+public class ModelGenerator : IGenerator
 {
     private readonly BidEntity m_Entity;
     private readonly string m_TargetNamespace;
 
-    public InfoGenerator(BidEntity entity, string targetNamespace)
+    public ModelGenerator(BidEntity entity, string targetNamespace)
     {
         m_Entity = entity ?? throw new ArgumentNullException(nameof(entity));
         
@@ -28,10 +28,10 @@ public class InfoGenerator : IGenerator
     }
 
     /// <summary>
-    /// Generates an Info class based on the <see cref="BidEntity"/>
+    /// Generates a Model class based on the <see cref="BidEntity"/>
     /// and targetNamespace.
     /// </summary>
-    /// <returns>Generated Info class.</returns>
+    /// <returns>Generated Model class.</returns>
     public string Generate()
     {
         StringBuilder sb = new();
@@ -43,7 +43,7 @@ public class InfoGenerator : IGenerator
 
         //Add namespace and class
         sb.AppendLineFeed($"namespace {m_TargetNamespace};")
-            .AppendLineFeed($"public partial class {m_Entity.Name}Info")
+            .AppendLineFeed($"public partial class {m_Entity.Name}Model")
             .AppendLineFeed("{");
 
        bool isFirstElement = true;
@@ -67,7 +67,7 @@ public class InfoGenerator : IGenerator
                 isFirstElement = false;
             }
 
-            sb.AppendLineFeed($"    private readonly List<{entitySet}Info> m_{entitySet.ToPlural()} = new();");
+            sb.AppendLineFeed($"    private readonly List<{entitySet}Model> m_{entitySet.ToPlural()} = new();");
         }
 
         //Add properties for each attribute
@@ -98,7 +98,7 @@ public class InfoGenerator : IGenerator
                 isFirstElement = false;
             }
 
-            sb.AppendLineFeed($"    public {entity}Info {entity}")
+            sb.AppendLineFeed($"    public {entity}Model {entity}")
                 .AppendLineFeed("    { get; set; }");
         }
 
@@ -134,7 +134,7 @@ public class InfoGenerator : IGenerator
             }
 
             string pluralEntitySet = entitySet.ToPlural();
-            sb.AppendLineFeed($"    public List<{entitySet}Info> {pluralEntitySet}")
+            sb.AppendLineFeed($"    public List<{entitySet}Model> {pluralEntitySet}")
                 .AppendLineFeed("    {")
                 .AppendLineFeed($"        get {{ return m_{pluralEntitySet}; }}")
                 .AppendLineFeed("    }");

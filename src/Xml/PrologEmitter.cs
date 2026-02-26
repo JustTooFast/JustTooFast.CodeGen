@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class PrologDeclaration : DeclarationBase
+public partial class PrologEmitter : EmitterBase
 {
-    public PrologDeclaration(PrologInfo prolog, IAppender appender)
+    public PrologEmitter(PrologModel prolog, IAppender appender)
         : this(prolog)
     {
         Appender = appender;
@@ -13,12 +13,12 @@ public partial class PrologDeclaration : DeclarationBase
     private partial void Validate()
     {
         //Ensure Xml is initialized
-        m_Prolog.Xml ??= new XmlInfo();
+        m_Prolog.Xml ??= new XmlModel();
     }
     
     public override void AppendDeclaration()
     {
-        XmlDeclaration xmlDeclaration = new(m_Prolog.Xml, Appender);
-        xmlDeclaration.AppendDeclaration();
+        XmlEmitter xmlEmitter = new(m_Prolog.Xml, Appender);
+        xmlEmitter.AppendDeclaration();
     }
 }

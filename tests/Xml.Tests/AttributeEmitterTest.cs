@@ -6,7 +6,7 @@ using System;
 namespace JustTooFast.CodeGen.Xml.Tests;
 
 [TestClass]
-public class AttributeDeclarationTest
+public class AttributeEmitterTest
 {
     [TestMethod]
     public void AppendDeclaration_WithName_ReturnNameAndEmptyValue()
@@ -18,7 +18,7 @@ public class AttributeDeclarationTest
         string expected = "id=\"\"";
 
         //Act
-        AttributeDeclaration target = new(builder, new Appender());
+        AttributeEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -37,7 +37,7 @@ public class AttributeDeclarationTest
         string expected = "id=\"bk101\"";
 
         //Act
-        AttributeDeclaration target = new(builder, new Appender());
+        AttributeEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -53,6 +53,6 @@ public class AttributeDeclarationTest
         AttributeBuilder builder = new();
 
         //Act
-        AttributeDeclaration target = new(builder, new Appender());
+        AttributeEmitter target = new(builder, new Appender());
     }
 }

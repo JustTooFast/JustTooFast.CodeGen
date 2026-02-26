@@ -6,18 +6,18 @@ using System;
 namespace JustTooFast.CodeGen.Xml;
 public class XmlSnippetGenerator : IGenerator
 {
-    private readonly XmlSnippetInfo m_XmlSnippet;
+    private readonly XmlSnippetModel m_XmlSnippet;
 
-    public XmlSnippetGenerator(XmlSnippetInfo xmlSnippet)
+    public XmlSnippetGenerator(XmlSnippetModel xmlSnippet)
     {
         m_XmlSnippet = xmlSnippet ?? throw new ArgumentNullException(nameof(xmlSnippet));
     }
 
     public string Generate()
     {
-        XmlSnippetDeclaration xmlSnippetDeclaration = new(m_XmlSnippet, new Appender());
-        xmlSnippetDeclaration.AppendDeclaration();
+        XmlSnippetEmitter xmlSnippetEmitter = new(m_XmlSnippet, new Appender());
+        xmlSnippetEmitter.AppendDeclaration();
 
-        return xmlSnippetDeclaration.ToString();
+        return xmlSnippetEmitter.ToString();
     }
 }

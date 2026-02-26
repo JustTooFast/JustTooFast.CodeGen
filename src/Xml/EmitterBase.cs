@@ -4,7 +4,7 @@
 using System;
 
 namespace JustTooFast.CodeGen.Xml;
-public abstract class DeclarationBase
+public abstract class EmitterBase
 {
     private IAppender m_Appender;
 

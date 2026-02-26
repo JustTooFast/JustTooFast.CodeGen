@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class XmlSnippetDeclaration : DeclarationBase
+public partial class XmlSnippetEmitter : EmitterBase
 {
-    public XmlSnippetDeclaration(XmlSnippetInfo xmlSnippet, IAppender appender)
+    public XmlSnippetEmitter(XmlSnippetModel xmlSnippet, IAppender appender)
         : this(xmlSnippet)
     {
         Appender = appender;
@@ -19,7 +19,7 @@ public partial class XmlSnippetDeclaration : DeclarationBase
     public override void AppendDeclaration()
     {
         bool isFirst = true;
-        foreach (ElementInfo element in m_XmlSnippet.Elements)
+        foreach (ElementModel element in m_XmlSnippet.Elements)
         {
             //Skip line feed on first element
             if(isFirst)
@@ -27,8 +27,8 @@ public partial class XmlSnippetDeclaration : DeclarationBase
             else
                 Appender.AppendLineFeed();
 
-            ElementDeclaration elementDeclaration = new(element, Appender);
-            elementDeclaration.AppendDeclaration();
+            ElementEmitter elementEmitter = new(element, Appender);
+            elementEmitter.AppendDeclaration();
         }
     }
 }

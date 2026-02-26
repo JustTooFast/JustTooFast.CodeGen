@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class XmlDeclaration : DeclarationBase
+public partial class XmlEmitter : EmitterBase
 {
-    public XmlDeclaration(XmlInfo xml, IAppender appender)
+    public XmlEmitter(XmlModel xml, IAppender appender)
         : this(xml)
     {
         Appender = appender;

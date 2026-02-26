@@ -33,15 +33,15 @@ public class BidWriterTest
         Assert.AreEqual(expectedCallsTo_Write, actualNumWrittenFiles);
         Assert.IsTrue(fileSpy.ReadFilePaths.Contains($"Input{Path.DirectorySeparatorChar}First.bid"));
         Assert.IsTrue(fileSpy.ReadFilePaths.Contains($"Input{Path.DirectorySeparatorChar}Second.bid"));
-        Assert.IsTrue(fileSpy.WrittenFiles.ContainsKey($"Output{Path.DirectorySeparatorChar}FirstInfo.gen.cs"));
-        Assert.IsTrue(fileSpy.WrittenFiles.ContainsKey($"Output{Path.DirectorySeparatorChar}SecondInfo.gen.cs"));
+        Assert.IsTrue(fileSpy.WrittenFiles.ContainsKey($"Output{Path.DirectorySeparatorChar}FirstModel.gen.cs"));
+        Assert.IsTrue(fileSpy.WrittenFiles.ContainsKey($"Output{Path.DirectorySeparatorChar}SecondModel.gen.cs"));
         Assert.IsTrue(fileSpy.WrittenFiles.ContainsKey($"Output{Path.DirectorySeparatorChar}FirstBuilder.gen.cs"));
         Assert.IsTrue(fileSpy.WrittenFiles.ContainsKey($"Output{Path.DirectorySeparatorChar}SecondBuilder.gen.cs"));
-        Assert.IsTrue(fileSpy.WrittenFiles.ContainsKey($"Output{Path.DirectorySeparatorChar}FirstDeclaration.gen.cs"));
-        Assert.IsTrue(fileSpy.WrittenFiles.ContainsKey($"Output{Path.DirectorySeparatorChar}SecondDeclaration.gen.cs"));
-        Assert.IsTrue(fileSpy.WrittenFiles[$"Output{Path.DirectorySeparatorChar}FirstInfo.gen.cs"].Contains("class FirstInfo"));
+        Assert.IsTrue(fileSpy.WrittenFiles.ContainsKey($"Output{Path.DirectorySeparatorChar}FirstEmitter.gen.cs"));
+        Assert.IsTrue(fileSpy.WrittenFiles.ContainsKey($"Output{Path.DirectorySeparatorChar}SecondEmitter.gen.cs"));
+        Assert.IsTrue(fileSpy.WrittenFiles[$"Output{Path.DirectorySeparatorChar}FirstModel.gen.cs"].Contains("class FirstModel"));
         Assert.IsTrue(fileSpy.WrittenFiles[$"Output{Path.DirectorySeparatorChar}FirstBuilder.gen.cs"].Contains("class FirstBuilder"));
-        Assert.IsTrue(fileSpy.WrittenFiles[$"Output{Path.DirectorySeparatorChar}FirstDeclaration.gen.cs"].Contains("class FirstDeclaration"));
+        Assert.IsTrue(fileSpy.WrittenFiles[$"Output{Path.DirectorySeparatorChar}FirstEmitter.gen.cs"].Contains("class FirstEmitter"));
     }
 
     [TestMethod]

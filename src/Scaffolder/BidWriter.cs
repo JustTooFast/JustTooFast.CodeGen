@@ -8,7 +8,7 @@ using System.Text;
 namespace JustTooFast.CodeGen.Scaffolder;
 
 /// <summary>
-/// Writes generated Builder, Info, and Declaration classes.
+/// Writes generated Builder, Model, and Emitter classes.
 /// </summary>
 public class BidWriter : IBidWriter
 {
@@ -23,7 +23,7 @@ public class BidWriter : IBidWriter
 
     /// <summary>
     /// Converts "bid" domain specific language (DSL) input files into
-    /// generated builder, info, and declaration classes and writes
+    /// generated builder, model, and emitter classes and writes
     /// them to an output folder.
     /// </summary>
     /// <param name="inputFolder">The folder holding "bid" DSL files to be parsed.</param>
@@ -46,25 +46,25 @@ public class BidWriter : IBidWriter
             File inputFile = m_FileHelper.Read(filePath);
             BidEntity entity = m_BidParser.Parse(inputFile);
 
-            IGenerator infoGen = new InfoGenerator(entity, targetNamespace);
-            string infoFileContents = infoGen.Generate();
+            IGenerator modelGen = new ModelGenerator(entity, targetNamespace);
+            string modelFileContents = modelGen.Generate();
 
             IGenerator builderGen = new BuilderGenerator(entity, targetNamespace);
             string builderFileContents = builderGen.Generate();
 
-            IGenerator declarationGen = new DeclarationGenerator(entity, targetNamespace);
-            string declarationFileContents = declarationGen.Generate();
+            IGenerator emitterGen = new EmitterGenerator(entity, targetNamespace);
+            string emitterFileContents = emitterGen.Generate();
 
             string outputFilePrefix = $"{outputFolder}{Path.DirectorySeparatorChar}{entity.Name}";
 
             string header = GetHeader();
-            m_FileHelper.Write($"{outputFilePrefix}Info.gen.cs", $"{header}{infoFileContents}");
+            m_FileHelper.Write($"{outputFilePrefix}Model.gen.cs", $"{header}{modelFileContents}");
             result++;
 
             m_FileHelper.Write($"{outputFilePrefix}Builder.gen.cs", $"{header}{builderFileContents}");
             result++;
 
-            m_FileHelper.Write($"{outputFilePrefix}Declaration.gen.cs", $"{header}{declarationFileContents}");
+            m_FileHelper.Write($"{outputFilePrefix}Emitter.gen.cs", $"{header}{emitterFileContents}");
             result++;
         }
 

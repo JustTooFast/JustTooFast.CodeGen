@@ -4,7 +4,7 @@
 namespace JustTooFast.CodeGen.Xml.Tests;
 
 [TestClass]
-public class XmlSnippetDeclarationTest
+public class XmlSnippetEmitterTest
 {
     [TestMethod]
     public void AppendDeclaration_WithElement_ReturnWithElement()
@@ -17,7 +17,7 @@ public class XmlSnippetDeclarationTest
         string expected = "<book></book>";
 
         //Act
-        XmlSnippetDeclaration target = new(builder, new Appender());
+        XmlSnippetEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -40,7 +40,7 @@ public class XmlSnippetDeclarationTest
 <book></book>";
 
         //Act
-        XmlSnippetDeclaration target = new(builder, new Appender());
+        XmlSnippetEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -56,6 +56,6 @@ public class XmlSnippetDeclarationTest
         XmlSnippetBuilder builder = new();
 
         //Act
-        XmlSnippetDeclaration target = new(builder, new Appender());
+        XmlSnippetEmitter target = new(builder, new Appender());
     }
 }

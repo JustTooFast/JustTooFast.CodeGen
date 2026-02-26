@@ -5,7 +5,7 @@ using System;
 using System.Text;
 
 namespace JustTooFast.CodeGen.SampleXml;
-public partial class ElementDeclaration
+public partial class ElementEmitter
 {
     private partial void Validate()
     {
@@ -19,10 +19,10 @@ public partial class ElementDeclaration
 
         sb.Append($"<{m_Element.Name}");
         
-        foreach (AttributeInfo attribute in m_Element.Attributes)
+        foreach (AttributeModel attribute in m_Element.Attributes)
         {
-            AttributeDeclaration ad = new(attribute);
-            sb.Append($" {ad.Generate()}");
+            AttributeEmitter ae = new(attribute);
+            sb.Append($" {ae.Generate()}");
         }
 
         sb.Append('>');
@@ -34,11 +34,11 @@ public partial class ElementDeclaration
         }
         else
         {
-            foreach (ElementInfo element in m_Element.Elements)
+            foreach (ElementModel element in m_Element.Elements)
             {
-                ElementDeclaration ed = new(element);
+                ElementEmitter ee = new(element);
                 sb.AppendLine()
-                    .Append(Indent(ed.Generate()));
+                    .Append(Indent(ee.Generate()));
             }
 
             if (m_Element.Elements.Count > 0)

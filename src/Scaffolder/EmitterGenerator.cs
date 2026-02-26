@@ -7,16 +7,16 @@ using System.Text;
 namespace JustTooFast.CodeGen.Scaffolder;
 
 /// <summary>
-/// Generates a Declaration class which is responsible for
-/// generating code based on inputs from an Info object.
-/// <seealso cref="InfoGenerator"/>
+/// Generates an Emitter class which is responsible for
+/// generating code based on inputs from a Model object.
+/// <seealso cref="ModelGenerator"/>
 /// </summary>
-public class DeclarationGenerator : IGenerator
+public class EmitterGenerator : IGenerator
 {
     private readonly BidEntity m_Entity;
     private readonly string m_TargetNamespace;
 
-    public DeclarationGenerator(BidEntity entity, string targetNamespace)
+    public EmitterGenerator(BidEntity entity, string targetNamespace)
     {
         m_Entity = entity ?? throw new ArgumentNullException(nameof(entity));
 
@@ -27,10 +27,10 @@ public class DeclarationGenerator : IGenerator
     }
 
     /// <summary>
-    /// Generates a Declaration class based on the <see cref="BidEntity"/>
+    /// Generates an Emitter class based on the <see cref="BidEntity"/>
     /// and targetNamespace.
     /// </summary>
-    /// <returns>Generated Declaration class.</returns>
+    /// <returns>Generated Emitter class.</returns>
     public string Generate()
     {
         StringBuilder sb = new();
@@ -42,17 +42,17 @@ public class DeclarationGenerator : IGenerator
 
         //Add namespace and class
         sb.AppendLineFeed($"namespace {m_TargetNamespace};")
-            .AppendLineFeed($"public partial class {m_Entity.Name}Declaration")
+            .AppendLineFeed($"public partial class {m_Entity.Name}Emitter")
             .AppendLineFeed("{");
 
-        //Add field for info
-        sb.AppendLineFeed($"    private readonly {m_Entity.Name}Info m_{m_Entity.Name};");
+        //Add field for model
+        sb.AppendLineFeed($"    private readonly {m_Entity.Name}Model m_{m_Entity.Name};");
 
         sb.AppendLineFeed();
 
         //Add constructor
         string camelCaseName = m_Entity.Name.ToLowerFirstLetter();
-        sb.AppendLineFeed($"    public {m_Entity.Name}Declaration({m_Entity.Name}Info {camelCaseName})")
+        sb.AppendLineFeed($"    public {m_Entity.Name}Emitter({m_Entity.Name}Model {camelCaseName})")
             .AppendLineFeed("    {")
             .AppendLineFeed($"        m_{m_Entity.Name} = {camelCaseName} ?? throw new ArgumentNullException(nameof({camelCaseName}));")
             .AppendLineFeed()

@@ -4,13 +4,13 @@
 namespace JustTooFast.CodeGen.Scaffolder;
 
 /// <summary>
-/// Contract for writing generated Builder, Info, and Declaration classes.
+/// Contract for writing generated Builder, Model, and Emitter classes.
 /// </summary>
 public interface IBidWriter
 {
     /// <summary>
     /// Converts "bid" domain specific language (DSL) input files into
-    /// generated builder, info, and declaration classes and writes
+    /// generated builder, model, and emitter classes and writes
     /// them to an output folder.
     /// </summary>
     /// <param name="inputFolder">The folder holding "bid" DSL files to be parsed.</param>

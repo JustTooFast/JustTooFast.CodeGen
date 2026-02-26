@@ -4,7 +4,7 @@
 namespace JustTooFast.CodeGen.Scaffolder.Tests;
 
 [TestClass]
-public class DeclarationGeneratorTest
+public class EmitterGeneratorTest
 {
     [TestMethod]
     public void Generate_WithBasicStructure_ReturnStructure()
@@ -17,11 +17,11 @@ public class DeclarationGeneratorTest
 @"using System;
 
 namespace MyNamespace;
-public partial class TestDeclaration
+public partial class TestEmitter
 {
-    private readonly TestInfo m_Test;
+    private readonly TestModel m_Test;
 
-    public TestDeclaration(TestInfo test)
+    public TestEmitter(TestModel test)
     {
         m_Test = test ?? throw new ArgumentNullException(nameof(test));
 
@@ -33,7 +33,7 @@ public partial class TestDeclaration
 ";
 
         //Act
-        IGenerator target = new DeclarationGenerator(entity, targetNamespace);
+        IGenerator target = new EmitterGenerator(entity, targetNamespace);
         string actual = target.Generate();
 
         //Assert

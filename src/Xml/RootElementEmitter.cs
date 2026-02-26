@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class RootElementDeclaration : DeclarationBase
+public partial class RootElementEmitter : EmitterBase
 {
-    public RootElementDeclaration(RootElementInfo rootElement, IAppender appender)
+    public RootElementEmitter(RootElementModel rootElement, IAppender appender)
         : this(rootElement)
     {
         Appender = appender;
@@ -20,23 +20,23 @@ public partial class RootElementDeclaration : DeclarationBase
     {
         Appender.Append($"<{m_RootElement.Name}");
 
-        foreach (AttributeInfo attribute in m_RootElement.Attributes)
+        foreach (AttributeModel attribute in m_RootElement.Attributes)
         {
             Appender.Append(' ');
-            AttributeDeclaration attributeDeclaration = new(attribute, Appender);
-            attributeDeclaration.AppendDeclaration();
+            AttributeEmitter attributeEmitter = new(attribute, Appender);
+            attributeEmitter.AppendDeclaration();
         }
 
         Appender.Append('>');
 
-        foreach (ElementInfo element in m_RootElement.Elements)
+        foreach (ElementModel element in m_RootElement.Elements)
         {
             Appender.AppendLineFeed();
-            ElementDeclaration elementDeclaration = new(element, Appender)
+            ElementEmitter elementEmitter = new(element, Appender)
             {
                 TabLevel = 1
             };
-            elementDeclaration.AppendDeclaration();
+            elementEmitter.AppendDeclaration();
         }
 
         if (m_RootElement.Elements.Count > 0)

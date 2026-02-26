@@ -4,7 +4,7 @@
 namespace JustTooFast.CodeGen.Xml.Tests;
 
 [TestClass]
-public class RootElementDeclarationTest
+public class RootElementEmitterTest
 {
     [TestMethod]
     public void AppendDeclaration_WithName_ReturnWithName()
@@ -16,7 +16,7 @@ public class RootElementDeclarationTest
         string expected = "<rootElement></rootElement>";
 
         //Act
-        RootElementDeclaration target = new(builder, new Appender());
+        RootElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -36,7 +36,7 @@ public class RootElementDeclarationTest
         string expected = "<rootElement myAttribute=\"\"></rootElement>";
 
         //Act
-        RootElementDeclaration target = new(builder, new Appender());
+        RootElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -58,7 +58,7 @@ public class RootElementDeclarationTest
         string expected = "<rootElement first=\"\" second=\"\"></rootElement>";
 
         //Act
-        RootElementDeclaration target = new(builder, new Appender());
+        RootElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -81,7 +81,7 @@ public class RootElementDeclarationTest
 </catalog>";
 
         //Act
-        RootElementDeclaration target = new(builder, new Appender());
+        RootElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -107,7 +107,7 @@ public class RootElementDeclarationTest
 </catalog>";
 
         //Act
-        RootElementDeclaration target = new(builder, new Appender());
+        RootElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -123,6 +123,6 @@ public class RootElementDeclarationTest
         RootElementBuilder builder = new();
 
         //Act
-        RootElementDeclaration target = new(builder, new Appender());
+        RootElementEmitter target = new(builder, new Appender());
     }
 }

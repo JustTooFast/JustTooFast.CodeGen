@@ -21,16 +21,16 @@ using System.Collections.Generic;
 namespace MyNamespace;
 public partial class TestBuilder
 {
-    private readonly TestInfo m_Test = new();
+    private readonly TestModel m_Test = new();
 
-    public static implicit operator TestInfo(TestBuilder builder)
+    public static implicit operator TestModel(TestBuilder builder)
     {
         return builder.m_Test;
     }
 
-    public static implicit operator TestDeclaration(TestBuilder builder)
+    public static implicit operator TestEmitter(TestBuilder builder)
     {
-        return new TestDeclaration(builder.m_Test);
+        return new TestEmitter(builder.m_Test);
     }
 
     public TestBuilder WithItem1(string item1)
@@ -78,19 +78,19 @@ using System.Collections.Generic;
 namespace MyNamespace;
 public partial class TestBuilder
 {
-    private readonly TestInfo m_Test = new();
+    private readonly TestModel m_Test = new();
 
-    public static implicit operator TestInfo(TestBuilder builder)
+    public static implicit operator TestModel(TestBuilder builder)
     {
         return builder.m_Test;
     }
 
-    public static implicit operator TestDeclaration(TestBuilder builder)
+    public static implicit operator TestEmitter(TestBuilder builder)
     {
-        return new TestDeclaration(builder.m_Test);
+        return new TestEmitter(builder.m_Test);
     }
 
-    public TestBuilder WithItem1(Item1Info item1)
+    public TestBuilder WithItem1(Item1Model item1)
     {
         m_Test.Item1 = item1 ?? throw new ArgumentNullException(nameof(item1));
 
@@ -106,7 +106,7 @@ public partial class TestBuilder
         return this;
     }
 
-    public TestBuilder WithItem2(Item2Info item2)
+    public TestBuilder WithItem2(Item2Model item2)
     {
         m_Test.Item2 = item2 ?? throw new ArgumentNullException(nameof(item2));
 
@@ -147,16 +147,16 @@ using System.Collections.Generic;
 namespace MyNamespace;
 public partial class TestBuilder
 {
-    private readonly TestInfo m_Test = new();
+    private readonly TestModel m_Test = new();
 
-    public static implicit operator TestInfo(TestBuilder builder)
+    public static implicit operator TestModel(TestBuilder builder)
     {
         return builder.m_Test;
     }
 
-    public static implicit operator TestDeclaration(TestBuilder builder)
+    public static implicit operator TestEmitter(TestBuilder builder)
     {
-        return new TestDeclaration(builder.m_Test);
+        return new TestEmitter(builder.m_Test);
     }
 
     public TestBuilder WithItem1(string item1)
@@ -224,19 +224,19 @@ using System.Collections.Generic;
 namespace MyNamespace;
 public partial class TestBuilder
 {
-    private readonly TestInfo m_Test = new();
+    private readonly TestModel m_Test = new();
 
-    public static implicit operator TestInfo(TestBuilder builder)
+    public static implicit operator TestModel(TestBuilder builder)
     {
         return builder.m_Test;
     }
 
-    public static implicit operator TestDeclaration(TestBuilder builder)
+    public static implicit operator TestEmitter(TestBuilder builder)
     {
-        return new TestDeclaration(builder.m_Test);
+        return new TestEmitter(builder.m_Test);
     }
 
-    public TestBuilder WithItem1(Item1Info item1)
+    public TestBuilder WithItem1(Item1Model item1)
     {
         if (item1 == null)
             throw new ArgumentNullException(nameof(item1));
@@ -255,7 +255,7 @@ public partial class TestBuilder
         return this;
     }
 
-    public TestBuilder WithItem1s(Item1Info[] item1s)
+    public TestBuilder WithItem1s(Item1Model[] item1s)
     {
         if (item1s == null)
             throw new ArgumentNullException(nameof(item1s));
@@ -265,7 +265,7 @@ public partial class TestBuilder
         return this;
     }
 
-    public TestBuilder WithItem2(Item2Info item2)
+    public TestBuilder WithItem2(Item2Model item2)
     {
         if (item2 == null)
             throw new ArgumentNullException(nameof(item2));
@@ -284,7 +284,7 @@ public partial class TestBuilder
         return this;
     }
 
-    public TestBuilder WithItem2s(Item2Info[] item2s)
+    public TestBuilder WithItem2s(Item2Model[] item2s)
     {
         if (item2s == null)
             throw new ArgumentNullException(nameof(item2s));
@@ -322,16 +322,16 @@ using System.Collections.Generic;
 namespace MyNamespace;
 public partial class Test2Builder
 {
-    private readonly Test2Info m_Test2 = new();
+    private readonly Test2Model m_Test2 = new();
 
-    public static implicit operator Test2Info(Test2Builder builder)
+    public static implicit operator Test2Model(Test2Builder builder)
     {
         return builder.m_Test2;
     }
 
-    public static implicit operator Test2Declaration(Test2Builder builder)
+    public static implicit operator Test2Emitter(Test2Builder builder)
     {
-        return new Test2Declaration(builder.m_Test2);
+        return new Test2Emitter(builder.m_Test2);
     }
 
     public Test2Builder WithItem1(string item1)
@@ -344,7 +344,7 @@ public partial class Test2Builder
         return this;
     }
 
-    public Test2Builder WithItem2(Item2Info item2)
+    public Test2Builder WithItem2(Item2Model item2)
     {
         m_Test2.Item2 = item2 ?? throw new ArgumentNullException(nameof(item2));
 
@@ -380,7 +380,7 @@ public partial class Test2Builder
         return this;
     }
 
-    public Test2Builder WithItem4(Item4Info item4)
+    public Test2Builder WithItem4(Item4Model item4)
     {
         if (item4 == null)
             throw new ArgumentNullException(nameof(item4));
@@ -399,7 +399,7 @@ public partial class Test2Builder
         return this;
     }
 
-    public Test2Builder WithItem4s(Item4Info[] item4s)
+    public Test2Builder WithItem4s(Item4Model[] item4s)
     {
         if (item4s == null)
             throw new ArgumentNullException(nameof(item4s));

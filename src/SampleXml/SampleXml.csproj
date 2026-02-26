@@ -18,8 +18,8 @@
     <!-- Generated files -->
     <Compile Include="Output\*.gen.cs" />
 
-    <Compile Include="AttributeDeclaration.cs" />
-    <Compile Include="ElementDeclaration.cs" />
+    <Compile Include="AttributeEmitter.cs" />
+    <Compile Include="ElementEmitter.cs" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
@@ -28,8 +28,8 @@
 
   <Target Name="PreBuild_unix" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Unix' ">
     <MakeDir Directories="$(ProjectDir)Output" />
-    <Exec Command="rm -f &quot;$(ProjectDir)Output/*.gen.cs&quot;" />
-    <Exec Command='dotnet run --project &quot;$(ProjectDir)../Scaffolder.Cli/Scaffolder.Cli.csproj&quot; -- &quot;$(ProjectDir)Input&quot; &quot;$(ProjectDir)Output&quot; &quot;JustTooFast.CodeGen.SampleXml&quot;' />
+    <Exec Command="find &quot;$(ProjectDir)Output&quot; -maxdepth 1 -name &quot;*.gen.cs&quot; -type f -delete" />
+    <Exec Command="dotnet run --project &quot;$(ProjectDir)../Scaffolder.Cli/Scaffolder.Cli.csproj&quot; -- &quot;$(ProjectDir)Input&quot; &quot;$(ProjectDir)Output&quot; &quot;JustTooFast.CodeGen.SampleXml&quot;" />
   </Target>
 
 </Project>

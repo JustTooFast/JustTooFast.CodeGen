@@ -7,8 +7,8 @@ namespace JustTooFast.CodeGen.Scaffolder;
 
 /// <summary>
 /// Holds the data points used by <see cref="BuilderGenerator"/>,
-/// <see cref="InfoGenerator"/>, and <see cref="DeclarationGenerator"/>
-/// to generate Builder, Info, and Declaration classes.
+/// <see cref="ModelGenerator"/>, and <see cref="EmitterGenerator"/>
+/// to generate Builder, Model, and Emitter classes.
 /// </summary>
 public class BidEntity
 {
@@ -18,7 +18,7 @@ public class BidEntity
     private readonly List<string> m_EntitySets = new();
 
     /// <summary>
-    /// The root name of the Builder, Info, Declaration classes.
+    /// The root name of the Builder, Model, Emitter classes.
     /// </summary>
     public string Name
     { get; set;}

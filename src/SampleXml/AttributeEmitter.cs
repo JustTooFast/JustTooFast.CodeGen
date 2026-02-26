@@ -4,7 +4,7 @@
 using System;
 
 namespace JustTooFast.CodeGen.SampleXml;
-public partial class AttributeDeclaration
+public partial class AttributeEmitter
 {
     private partial void Validate()
     {

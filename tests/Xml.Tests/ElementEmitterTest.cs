@@ -4,7 +4,7 @@
 namespace JustTooFast.CodeGen.Xml.Tests;
 
 [TestClass]
-public class ElementDeclarationTest
+public class ElementEmitterTest
 {
     [TestMethod]
     public void AppendDeclaration_WithName_ReturnWithName()
@@ -16,7 +16,7 @@ public class ElementDeclarationTest
         string expected = "<book></book>";
 
         //Act
-        ElementDeclaration target = new(builder, new Appender());
+        ElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -35,7 +35,7 @@ public class ElementDeclarationTest
         string expected = "<price>44.95</price>";
 
         //Act
-        ElementDeclaration target = new(builder, new Appender());
+        ElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -55,7 +55,7 @@ public class ElementDeclarationTest
         string expected = "<book id=\"\"></book>";
 
         //Act
-        ElementDeclaration target = new(builder, new Appender());
+        ElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -77,7 +77,7 @@ public class ElementDeclarationTest
         string expected = "<test first=\"\" second=\"\"></test>";
 
         //Act
-        ElementDeclaration target = new(builder, new Appender());
+        ElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -100,7 +100,7 @@ public class ElementDeclarationTest
 </book>";
 
         //Act
-        ElementDeclaration target = new(builder, new Appender());
+        ElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -126,7 +126,7 @@ public class ElementDeclarationTest
 </book>";
 
         //Act
-        ElementDeclaration target = new(builder, new Appender());
+        ElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -166,7 +166,7 @@ public class ElementDeclarationTest
 </catalog>";
 
         //Act
-        ElementDeclaration target = new(builder, new Appender());
+        ElementEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -182,7 +182,7 @@ public class ElementDeclarationTest
         ElementBuilder builder = new();
 
         //Act
-        ElementDeclaration target = new(builder, new Appender());
+        ElementEmitter target = new(builder, new Appender());
     }
 
     [TestMethod]
@@ -197,6 +197,6 @@ public class ElementDeclarationTest
                 .WithName("title"));
 
         //Act
-        ElementDeclaration target = new(builder, new Appender());
+        ElementEmitter target = new(builder, new Appender());
     }
 }

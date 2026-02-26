@@ -7,7 +7,7 @@ using System.Text;
 namespace JustTooFast.CodeGen.SampleXml.Tests;
 
 [TestClass]
-public class ElementDeclarationTest
+public class ElementEmitterTest
 {
     [TestMethod]
     public void Generate_WithName_ReturnWithName()
@@ -19,7 +19,7 @@ public class ElementDeclarationTest
         string expected = "<test></test>";
 
         //Act
-        ElementDeclaration target = new(builder);
+        ElementEmitter target = new(builder);
         string actual = target.Generate();
 
         //Assert
@@ -37,7 +37,7 @@ public class ElementDeclarationTest
         string expected = "<myElement>Hello, World!</myElement>";
 
         //Act
-        ElementDeclaration target = new(builder);
+        ElementEmitter target = new(builder);
         string actual = target.Generate();
 
         //Assert
@@ -56,7 +56,7 @@ public class ElementDeclarationTest
         string expected = "<myElement myAttribute=\"\"></myElement>";
 
         //Act
-        ElementDeclaration target = new(builder);
+        ElementEmitter target = new(builder);
         string actual = target.Generate();
 
         //Assert
@@ -77,7 +77,7 @@ public class ElementDeclarationTest
         string expected = "<test first=\"\" second=\"\"></test>";
 
         //Act
-        ElementDeclaration target = new(builder);
+        ElementEmitter target = new(builder);
         string actual = target.Generate();
 
         //Assert
@@ -100,7 +100,7 @@ public class ElementDeclarationTest
             .ToString();
 
         //Act
-        ElementDeclaration target = new(builder);
+        ElementEmitter target = new(builder);
         string actual = target.Generate();
 
         //Assert
@@ -126,7 +126,7 @@ public class ElementDeclarationTest
             .ToString();
 
         //Act
-        ElementDeclaration target = new(builder);
+        ElementEmitter target = new(builder);
         string actual = target.Generate();
 
         //Assert
@@ -166,7 +166,7 @@ public class ElementDeclarationTest
             .ToString();
 
         //Act
-        ElementDeclaration target = new(builder);
+        ElementEmitter target = new(builder);
         string actual = target.Generate();
 
         //Assert
@@ -181,6 +181,6 @@ public class ElementDeclarationTest
         ElementBuilder builder = new();
 
         //Act
-        ElementDeclaration target = new(builder);
+        ElementEmitter target = new(builder);
     }
 }

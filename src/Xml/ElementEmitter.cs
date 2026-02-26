@@ -5,9 +5,9 @@ using System;
 using System.Text;
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class ElementDeclaration : DeclarationBase
+public partial class ElementEmitter : EmitterBase
 {
-    public ElementDeclaration(ElementInfo element, IAppender appender)
+    public ElementEmitter(ElementModel element, IAppender appender)
         : this(element)
     {
         Appender = appender;
@@ -34,12 +34,12 @@ public partial class ElementDeclaration : DeclarationBase
 
         Appender.Append($"<{m_Element.Name}");
 
-        foreach (AttributeInfo attribute in m_Element.Attributes)
+        foreach (AttributeModel attribute in m_Element.Attributes)
         {
             Appender.Append(' ');
 
-            AttributeDeclaration attributeDeclaration = new(attribute, Appender);
-            attributeDeclaration.AppendDeclaration();
+            AttributeEmitter attributeEmitter = new(attribute, Appender);
+            attributeEmitter.AppendDeclaration();
         }
 
         Appender.Append('>');
@@ -50,14 +50,14 @@ public partial class ElementDeclaration : DeclarationBase
         }
         else
         {
-            foreach (ElementInfo element in m_Element.Elements)
+            foreach (ElementModel element in m_Element.Elements)
             {
                 Appender.AppendLineFeed();
-                ElementDeclaration elementDeclaration = new(element, Appender)
+                ElementEmitter elementEmitter = new(element, Appender)
                 {
                     TabLevel = TabLevel + 1
                 };
-                elementDeclaration.AppendDeclaration();
+                elementEmitter.AppendDeclaration();
             }
 
             if (m_Element.Elements.Count > 0)

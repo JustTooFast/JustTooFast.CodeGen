@@ -4,7 +4,7 @@
 namespace JustTooFast.CodeGen.Xml.Tests;
 
 [TestClass]
-public class XmlDeclarationTest
+public class XmlEmitterTest
 {
     [TestMethod]
     public void AppendDeclaration_WithDefaultVersion_ReturnVersion()
@@ -15,7 +15,7 @@ public class XmlDeclarationTest
         string expected = "<?xml version=\"1.0\"?>";
 
         //Act
-        XmlDeclaration target = new(builder, new Appender());
+        XmlEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -33,7 +33,7 @@ public class XmlDeclarationTest
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
         //Act
-        XmlDeclaration target = new(builder, new Appender());
+        XmlEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -51,7 +51,7 @@ public class XmlDeclarationTest
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
         //Act
-        XmlDeclaration target = new(builder, new Appender());
+        XmlEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -69,7 +69,7 @@ public class XmlDeclarationTest
         string expected = "<?xml version=\"1.0\" standalone=\"yes\"?>";
 
         //Act
-        XmlDeclaration target = new(builder, new Appender());
+        XmlEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -87,7 +87,7 @@ public class XmlDeclarationTest
         string expected = "<?xml version=\"1.0\" standalone=\"yes\"?>";
 
         //Act
-        XmlDeclaration target = new(builder, new Appender());
+        XmlEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -106,7 +106,7 @@ public class XmlDeclarationTest
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
 
         //Act
-        XmlDeclaration target = new(builder, new Appender());
+        XmlEmitter target = new(builder, new Appender());
         target.AppendDeclaration();
         string actual = target.ToString();
 
@@ -123,6 +123,6 @@ public class XmlDeclarationTest
             .WithStandalone("awesome");
 
         //Act
-        XmlDeclaration target = new(builder, new Appender());
+        XmlEmitter target = new(builder, new Appender());
     }
 }

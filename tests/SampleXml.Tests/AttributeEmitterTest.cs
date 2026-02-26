@@ -6,7 +6,7 @@ using System;
 namespace JustTooFast.CodeGen.SampleXml.Tests;
 
 [TestClass]
-public class AttributeDeclarationTest
+public class AttributeEmitterTest
 {
     [TestMethod]
     public void Generate_WithName_ReturnNameAndEmptyValue()
@@ -18,7 +18,7 @@ public class AttributeDeclarationTest
         string expected = "test=\"\"";
 
         //Act
-        AttributeDeclaration target = new(builder);
+        AttributeEmitter target = new(builder);
         string actual = target.Generate();
 
         //Assert
@@ -36,7 +36,7 @@ public class AttributeDeclarationTest
         string expected = "myName=\"myValue\"";
 
         //Act
-        AttributeDeclaration target = new(builder);
+        AttributeEmitter target = new(builder);
         string actual = target.Generate();
 
         //Assert
@@ -51,6 +51,6 @@ public class AttributeDeclarationTest
         AttributeBuilder builder = new();
 
         //Act
-        AttributeDeclaration target = new(builder);
+        AttributeEmitter target = new(builder);
     }
 }
