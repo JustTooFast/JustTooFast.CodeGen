@@ -7,7 +7,7 @@ namespace JustTooFast.CodeGen.Xml.Tests;
 public class XmlSnippetEmitterTest
 {
     [TestMethod]
-    public void AppendDeclaration_WithElement_ReturnWithElement()
+    public void EmitTo_WithElement_ReturnWithElement()
     {
         //Arrange
         XmlSnippetBuilder builder = new XmlSnippetBuilder()
@@ -17,16 +17,17 @@ public class XmlSnippetEmitterTest
         string expected = "<book></book>";
 
         //Act
-        XmlSnippetEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        XmlSnippetEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_With2Elements_ReturnWithElements()
+    public void EmitTo_With2Elements_ReturnWithElements()
     {
         //Arrange
         XmlSnippetBuilder builder = new XmlSnippetBuilder()
@@ -40,9 +41,10 @@ public class XmlSnippetEmitterTest
 <book></book>";
 
         //Act
-        XmlSnippetEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        XmlSnippetEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -56,6 +58,6 @@ public class XmlSnippetEmitterTest
         XmlSnippetBuilder builder = new();
 
         //Act
-        XmlSnippetEmitter target = new(builder, new Appender());
+        XmlSnippetEmitter target = new(builder);
     }
 }

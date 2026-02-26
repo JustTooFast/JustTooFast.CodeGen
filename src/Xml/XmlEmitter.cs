@@ -2,14 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class XmlEmitter : EmitterBase
+public partial class XmlEmitter : IEmitter
 {
-    public XmlEmitter(XmlModel xml, IAppender appender)
-        : this(xml)
-    {
-        Appender = appender;
-    }
-
     private partial void Validate()
     {
         if(!(m_Xml.Standalone == null ||
@@ -19,17 +13,17 @@ public partial class XmlEmitter : EmitterBase
             throw new XmlFormatException("Xml Standalone must be either 'yes', 'no', or not used.");
         }
     }
-    
-    public override void AppendDeclaration()
+
+    public void EmitTo(IAppender appender)
     {
-        Appender.Append("<?xml version=\"1.0\"");
+        appender.Append("<?xml version=\"1.0\"");
 
         if (m_Xml.Encoding != null)
-            Appender.Append($" encoding=\"{m_Xml.Encoding}\"");
+            appender.Append($" encoding=\"{m_Xml.Encoding}\"");
 
         if (m_Xml.Standalone != null)
-            Appender.Append($" standalone=\"{m_Xml.Standalone}\"");
+            appender.Append($" standalone=\"{m_Xml.Standalone}\"");
 
-        Appender.Append("?>");
+        appender.Append("?>");
     }
 }

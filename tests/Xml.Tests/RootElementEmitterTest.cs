@@ -7,7 +7,7 @@ namespace JustTooFast.CodeGen.Xml.Tests;
 public class RootElementEmitterTest
 {
     [TestMethod]
-    public void AppendDeclaration_WithName_ReturnWithName()
+    public void EmitTo_WithName_ReturnWithName()
     {
         //Arrange
         RootElementBuilder builder = new RootElementBuilder()
@@ -16,16 +16,17 @@ public class RootElementEmitterTest
         string expected = "<rootElement></rootElement>";
 
         //Act
-        RootElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        RootElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithSingleAttribute_ReturnWithAttribute()
+    public void EmitTo_WithSingleAttribute_ReturnWithAttribute()
     {
         //Arrange
         RootElementBuilder builder = new RootElementBuilder()
@@ -36,16 +37,17 @@ public class RootElementEmitterTest
         string expected = "<rootElement myAttribute=\"\"></rootElement>";
 
         //Act
-        RootElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        RootElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_With2Attributes_ReturnWithAttributes()
+    public void EmitTo_With2Attributes_ReturnWithAttributes()
     {
         //Arrange
         RootElementBuilder builder = new RootElementBuilder()
@@ -58,16 +60,17 @@ public class RootElementEmitterTest
         string expected = "<rootElement first=\"\" second=\"\"></rootElement>";
 
         //Act
-        RootElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        RootElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithChildElement_ReturnChildElement()
+    public void EmitTo_WithChildElement_ReturnChildElement()
     {
         //Arrange
         RootElementBuilder builder = new RootElementBuilder()
@@ -81,16 +84,17 @@ public class RootElementEmitterTest
 </catalog>";
 
         //Act
-        RootElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        RootElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_With2ChildElements_ReturnChildElements()
+    public void EmitTo_With2ChildElements_ReturnChildElements()
     {
         //Arrange
         RootElementBuilder builder = new RootElementBuilder()
@@ -107,9 +111,10 @@ public class RootElementEmitterTest
 </catalog>";
 
         //Act
-        RootElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        RootElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -123,6 +128,6 @@ public class RootElementEmitterTest
         RootElementBuilder builder = new();
 
         //Act
-        RootElementEmitter target = new(builder, new Appender());
+        RootElementEmitter target = new(builder);
     }
 }

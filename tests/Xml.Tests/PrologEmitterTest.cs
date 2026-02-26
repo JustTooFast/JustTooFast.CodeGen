@@ -7,7 +7,7 @@ namespace JustTooFast.CodeGen.Xml.Tests;
 public class PrologEmitterTest
 {
     [TestMethod]
-    public void AppendDeclaration_WithDefaultXml_ReturnXml()
+    public void EmitTo_WithDefaultXml_ReturnXml()
     {
         //Arrange
         PrologBuilder builder = new();
@@ -15,16 +15,17 @@ public class PrologEmitterTest
         string expected = "<?xml version=\"1.0\"?>";
 
         //Act
-        PrologEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        PrologEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithXmlEncoding_ReturnXmlEncoding()
+    public void EmitTo_WithXmlEncoding_ReturnXmlEncoding()
     {
         //Arrange
         PrologBuilder builder = new PrologBuilder()
@@ -34,9 +35,10 @@ public class PrologEmitterTest
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
         //Act
-        PrologEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        PrologEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);

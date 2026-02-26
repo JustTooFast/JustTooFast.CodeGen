@@ -1,30 +1,22 @@
 // Copyright 2023-2026 Matthew Yancer
 // SPDX-License-Identifier: Apache-2.0
 
-using System.Reflection.Metadata.Ecma335;
-
 namespace JustTooFast.CodeGen.Xml;
-public partial class AttributeEmitter : EmitterBase
+public partial class AttributeEmitter : IEmitter
 {
-    public AttributeEmitter(AttributeModel attribute, IAppender appender)
-        : this(attribute)
-    {
-        Appender = appender;
-    }
-
     private partial void Validate()
     {
         if (string.IsNullOrWhiteSpace(m_Attribute.Name))
             throw new XmlFormatException("Attribute Name is required.");
     }
 
-    public override void AppendDeclaration()
+    public void EmitTo(IAppender appender)
     {
-        Appender.Append($"{m_Attribute.Name}=\"");
+        appender.Append($"{m_Attribute.Name}=\"");
 
         if (!string.IsNullOrWhiteSpace(m_Attribute.Value))
-            Appender.Append(m_Attribute.Value);
+            appender.Append(m_Attribute.Value);
 
-        Appender.Append('\"');
+        appender.Append('\"'); 
     }
 }

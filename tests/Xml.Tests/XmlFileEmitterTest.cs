@@ -7,7 +7,7 @@ namespace JustTooFast.CodeGen.Xml.Tests;
 public class XmlFileEmitterTest
 {
     [TestMethod]
-    public void AppendDeclaration_WithRootElement_ReturnWithRootElement()
+    public void EmitTo_WithRootElement_ReturnWithRootElement()
     {
         //Arrange
         XmlFileBuilder builder = new XmlFileBuilder()
@@ -19,16 +19,17 @@ public class XmlFileEmitterTest
 <catalog></catalog>";
 
         //Act
-        XmlFileEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        XmlFileEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithPrologXmlEncoding_ReturnWithPrologXmlEncoding()
+    public void EmitTo_WithPrologXmlEncoding_ReturnWithPrologXmlEncoding()
     {
         //Arrange
         XmlFileBuilder builder = new XmlFileBuilder()
@@ -43,16 +44,17 @@ public class XmlFileEmitterTest
 <catalog></catalog>";
 
         //Act
-        XmlFileEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        XmlFileEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithDisableProlog_ReturnWithoutProlog()
+    public void EmitTo_WithDisableProlog_ReturnWithoutProlog()
     {
         //Arrange
         XmlFileBuilder builder1 = new XmlFileBuilder()
@@ -68,13 +70,15 @@ public class XmlFileEmitterTest
         string expected = "<catalog></catalog>";
 
         //Act
-        XmlFileEmitter target1 = new(builder1, new Appender());
-        target1.AppendDeclaration();
-        string actual1 = target1.ToString();
+        IAppender appender1 = new Appender();
+        XmlFileEmitter target1 = new(builder1);
+        target1.EmitTo(appender1);
+        string actual1 = appender1.ToString();
 
-        XmlFileEmitter target2 = new(builder2, new Appender());
-        target2.AppendDeclaration();
-        string actual2 = target2.ToString();
+        IAppender appender2 = new Appender();
+        XmlFileEmitter target2 = new(builder2);
+        target2.EmitTo(appender2);
+        string actual2 = appender2.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual1);
@@ -89,6 +93,6 @@ public class XmlFileEmitterTest
         XmlFileBuilder builder = new();
 
         //Act
-        XmlFileEmitter target = new(builder, new Appender());
+        XmlFileEmitter target = new(builder);
     }
 }

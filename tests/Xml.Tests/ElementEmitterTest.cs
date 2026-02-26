@@ -7,7 +7,7 @@ namespace JustTooFast.CodeGen.Xml.Tests;
 public class ElementEmitterTest
 {
     [TestMethod]
-    public void AppendDeclaration_WithName_ReturnWithName()
+    public void EmitTo_WithName_ReturnWithName()
     {
         //Arrange
         ElementBuilder builder = new ElementBuilder()
@@ -16,16 +16,17 @@ public class ElementEmitterTest
         string expected = "<book></book>";
 
         //Act
-        ElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        ElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithText_ReturnWithText()
+    public void EmitTo_WithText_ReturnWithText()
     {
         //Arrange
         ElementBuilder builder = new ElementBuilder()
@@ -35,16 +36,17 @@ public class ElementEmitterTest
         string expected = "<price>44.95</price>";
 
         //Act
-        ElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        ElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithSingleAttribute_ReturnWithAttribute()
+    public void EmitTo_WithSingleAttribute_ReturnWithAttribute()
     {
         //Arrange
         ElementBuilder builder = new ElementBuilder()
@@ -55,16 +57,17 @@ public class ElementEmitterTest
         string expected = "<book id=\"\"></book>";
 
         //Act
-        ElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        ElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_With2Attributes_ReturnWithAttributes()
+    public void EmitTo_With2Attributes_ReturnWithAttributes()
     {
         //Arrange
         ElementBuilder builder = new ElementBuilder()
@@ -77,16 +80,17 @@ public class ElementEmitterTest
         string expected = "<test first=\"\" second=\"\"></test>";
 
         //Act
-        ElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        ElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithChildElement_ReturnChildElement()
+    public void EmitTo_WithChildElement_ReturnChildElement()
     {
         //Arrange
         ElementBuilder builder = new ElementBuilder()
@@ -100,16 +104,17 @@ public class ElementEmitterTest
 </book>";
 
         //Act
-        ElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        ElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_With2ChildElements_ReturnChildElements()
+    public void EmitTo_With2ChildElements_ReturnChildElements()
     {
         //Arrange
         ElementBuilder builder = new ElementBuilder()
@@ -126,16 +131,17 @@ public class ElementEmitterTest
 </book>";
 
         //Act
-        ElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        ElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithNestedChildElements_ReturnChildElements()
+    public void EmitTo_WithNestedChildElements_ReturnChildElements()
     {
         //Arrange
         ElementBuilder builder = new ElementBuilder()
@@ -166,9 +172,10 @@ public class ElementEmitterTest
 </catalog>";
 
         //Act
-        ElementEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        ElementEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -182,7 +189,7 @@ public class ElementEmitterTest
         ElementBuilder builder = new();
 
         //Act
-        ElementEmitter target = new(builder, new Appender());
+        ElementEmitter target = new(builder);
     }
 
     [TestMethod]
@@ -197,6 +204,6 @@ public class ElementEmitterTest
                 .WithName("title"));
 
         //Act
-        ElementEmitter target = new(builder, new Appender());
+        ElementEmitter target = new(builder);
     }
 }

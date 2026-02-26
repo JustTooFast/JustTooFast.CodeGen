@@ -15,9 +15,10 @@ public class XmlFileGenerator : IGenerator
 
     public string Generate()
     {
-        XmlFileEmitter xmlFileEmitter = new(m_XmlFile, new Appender());
-        xmlFileEmitter.AppendDeclaration();
+        IAppender appender = new Appender();
+        XmlFileEmitter xmlFileEmitter = new(m_XmlFile);
+        xmlFileEmitter.EmitTo(appender);
 
-        return xmlFileEmitter.ToString();
+        return appender.ToString();
     }
 }

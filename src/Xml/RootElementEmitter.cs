@@ -2,46 +2,40 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class RootElementEmitter : EmitterBase
+public partial class RootElementEmitter : IEmitter
 {
-    public RootElementEmitter(RootElementModel rootElement, IAppender appender)
-        : this(rootElement)
-    {
-        Appender = appender;
-    }
-
     private partial void Validate()
     {
         if (string.IsNullOrWhiteSpace(m_RootElement.Name))
             throw new XmlFormatException("RootElement Name is required.");
     }
 
-    public override void AppendDeclaration()
+    public void EmitTo(IAppender appender)
     {
-        Appender.Append($"<{m_RootElement.Name}");
+        appender.Append($"<{m_RootElement.Name}");
 
         foreach (AttributeModel attribute in m_RootElement.Attributes)
         {
-            Appender.Append(' ');
-            AttributeEmitter attributeEmitter = new(attribute, Appender);
-            attributeEmitter.AppendDeclaration();
+            appender.Append(' ');
+            AttributeEmitter attributeEmitter = new(attribute);
+            attributeEmitter.EmitTo(appender);
         }
 
-        Appender.Append('>');
+        appender.Append('>');
 
         foreach (ElementModel element in m_RootElement.Elements)
         {
-            Appender.AppendLineFeed();
-            ElementEmitter elementEmitter = new(element, Appender)
+            appender.AppendLineFeed();
+            ElementEmitter elementEmitter = new(element)
             {
                 TabLevel = 1
             };
-            elementEmitter.AppendDeclaration();
+            elementEmitter.EmitTo(appender);
         }
 
         if (m_RootElement.Elements.Count > 0)
-            Appender.AppendLineFeed();
+            appender.AppendLineFeed();
 
-        Appender.Append($"</{m_RootElement.Name}>");
+        appender.Append($"</{m_RootElement.Name}>");
     }
 }

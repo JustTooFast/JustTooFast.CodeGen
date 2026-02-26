@@ -15,9 +15,10 @@ public class XmlSnippetGenerator : IGenerator
 
     public string Generate()
     {
-        XmlSnippetEmitter xmlSnippetEmitter = new(m_XmlSnippet, new Appender());
-        xmlSnippetEmitter.AppendDeclaration();
+        IAppender appender = new Appender();
+        XmlSnippetEmitter xmlSnippetEmitter = new(m_XmlSnippet);
+        xmlSnippetEmitter.EmitTo(appender);
 
-        return xmlSnippetEmitter.ToString();
+        return appender.ToString();
     }
 }

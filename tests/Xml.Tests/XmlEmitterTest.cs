@@ -7,7 +7,7 @@ namespace JustTooFast.CodeGen.Xml.Tests;
 public class XmlEmitterTest
 {
     [TestMethod]
-    public void AppendDeclaration_WithDefaultVersion_ReturnVersion()
+    public void EmitTo_WithDefaultVersion_ReturnVersion()
     {
         //Arrange
         XmlBuilder builder = new();
@@ -15,16 +15,17 @@ public class XmlEmitterTest
         string expected = "<?xml version=\"1.0\"?>";
 
         //Act
-        XmlEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        XmlEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithEncoding_ReturnEncoding()
+    public void EmitTo_WithEncoding_ReturnEncoding()
     {
         //Arrange
         XmlBuilder builder = new XmlBuilder()
@@ -33,16 +34,17 @@ public class XmlEmitterTest
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
         //Act
-        XmlEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        XmlEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithEncodingEnum_ReturnEncoding()
+    public void EmitTo_WithEncodingEnum_ReturnEncoding()
     {
         //Arrange
         XmlBuilder builder = new XmlBuilder()
@@ -51,16 +53,17 @@ public class XmlEmitterTest
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
         //Act
-        XmlEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        XmlEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithStandalone_ReturnStandalone()
+    public void EmitTo_WithStandalone_ReturnStandalone()
     {
         //Arrange
         XmlBuilder builder = new XmlBuilder()
@@ -69,16 +72,17 @@ public class XmlEmitterTest
         string expected = "<?xml version=\"1.0\" standalone=\"yes\"?>";
 
         //Act
-        XmlEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        XmlEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithStandaloneEnum_ReturnStandalone()
+    public void EmitTo_WithStandaloneEnum_ReturnStandalone()
     {
         //Arrange
         XmlBuilder builder = new XmlBuilder()
@@ -87,16 +91,17 @@ public class XmlEmitterTest
         string expected = "<?xml version=\"1.0\" standalone=\"yes\"?>";
 
         //Act
-        XmlEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        XmlEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithAllParametersDefined_ReturnAllParameters()
+    public void EmitTo_WithAllParametersDefined_ReturnAllParameters()
     {
         //Arrange
         XmlBuilder builder = new XmlBuilder()
@@ -106,9 +111,10 @@ public class XmlEmitterTest
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
 
         //Act
-        XmlEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        XmlEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -123,6 +129,6 @@ public class XmlEmitterTest
             .WithStandalone("awesome");
 
         //Act
-        XmlEmitter target = new(builder, new Appender());
+        XmlEmitter target = new(builder);
     }
 }

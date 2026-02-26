@@ -20,11 +20,11 @@
 
     <Compile Include="Appender.cs" />
     <Compile Include="AttributeEmitter.cs" />
-    <Compile Include="EmitterBase.cs" />
     <Compile Include="ElementEmitter.cs" />
     <Compile Include="Encoding.cs" />
     <Compile Include="EnumEx.cs" />
     <Compile Include="IAppender.cs" />
+    <Compile Include="IEmitter.cs" />
     <Compile Include="IGenerator.cs" />
     <Compile Include="PrologEmitter.cs" />
     <Compile Include="RootElementEmitter.cs" />

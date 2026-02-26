@@ -9,7 +9,7 @@ namespace JustTooFast.CodeGen.Xml.Tests;
 public class AttributeEmitterTest
 {
     [TestMethod]
-    public void AppendDeclaration_WithName_ReturnNameAndEmptyValue()
+    public void EmitTo_WithName_ReturnNameAndEmptyValue()
     {
         //Arrange
         AttributeBuilder builder = new AttributeBuilder()
@@ -18,16 +18,17 @@ public class AttributeEmitterTest
         string expected = "id=\"\"";
 
         //Act
-        AttributeEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        AttributeEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void AppendDeclaration_WithNameAndValue_ReturnNameAndValue()
+    public void EmitTo_WithNameAndValue_ReturnNameAndValue()
     {
         //Arrange
         AttributeBuilder builder = new AttributeBuilder()
@@ -37,9 +38,10 @@ public class AttributeEmitterTest
         string expected = "id=\"bk101\"";
 
         //Act
-        AttributeEmitter target = new(builder, new Appender());
-        target.AppendDeclaration();
-        string actual = target.ToString();
+        IAppender appender = new Appender();
+        AttributeEmitter target = new(builder);
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -53,6 +55,6 @@ public class AttributeEmitterTest
         AttributeBuilder builder = new();
 
         //Act
-        AttributeEmitter target = new(builder, new Appender());
+        AttributeEmitter target = new(builder);
     }
 }
