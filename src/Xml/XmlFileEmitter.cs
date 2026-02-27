@@ -17,13 +17,11 @@ public partial class XmlFileEmitter : IEmitter
     {
         if (!m_XmlFile.DisableProlog)
         {
-            PrologEmitter prologEmitter = new(m_XmlFile.Prolog);
-            prologEmitter.EmitTo(appender);
+            new PrologEmitter(m_XmlFile.Prolog).EmitTo(appender);
 
-            appender.AppendLineFeed();
+            appender.AppendLine();
         }
 
-        RootElementEmitter rootElementEmitter = new(m_XmlFile.RootElement);
-        rootElementEmitter.EmitTo(appender);
+        new RootElementEmitter(m_XmlFile.RootElement).EmitTo(appender);
     }
 }

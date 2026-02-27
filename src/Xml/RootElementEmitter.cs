@@ -12,30 +12,30 @@ public partial class RootElementEmitter : IEmitter
 
     public void EmitTo(IAppender appender)
     {
-        appender.Append($"<{m_RootElement.Name}");
+        appender.Append("<");
+        appender.Append(m_RootElement.Name);
 
         foreach (AttributeModel attribute in m_RootElement.Attributes)
         {
             appender.Append(' ');
-            AttributeEmitter attributeEmitter = new(attribute);
-            attributeEmitter.EmitTo(appender);
+            new AttributeEmitter(attribute).EmitTo(appender);
         }
 
         appender.Append('>');
 
+        IAppender indented = new IndentedAppender(appender, XmlFormatting.IndentUnit);
+
         foreach (ElementModel element in m_RootElement.Elements)
         {
-            appender.AppendLineFeed();
-            ElementEmitter elementEmitter = new(element)
-            {
-                TabLevel = 1
-            };
-            elementEmitter.EmitTo(appender);
+            indented.AppendLine();
+            new ElementEmitter(element).EmitTo(indented);
         }
 
         if (m_RootElement.Elements.Count > 0)
-            appender.AppendLineFeed();
+            appender.AppendLine();
 
-        appender.Append($"</{m_RootElement.Name}>");
+        appender.Append("</");
+        appender.Append(m_RootElement.Name);
+        appender.Append('>');
     }
 }

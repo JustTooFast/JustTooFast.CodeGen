@@ -4,7 +4,7 @@
 using System;
 
 namespace JustTooFast.CodeGen.SampleXml;
-public partial class AttributeEmitter
+public partial class AttributeEmitter : IEmitter
 {
     private partial void Validate()
     {
@@ -12,14 +12,14 @@ public partial class AttributeEmitter
             throw new Exception("Attribute Name is required.");
     }
 
-    public string Generate()
+    public void EmitTo(IAppender appender)
     {
-        string result = string.Empty;
-        if (string.IsNullOrWhiteSpace(m_Attribute.Value))
-            result = $"{m_Attribute.Name}=\"\"";
-        else
-            result = $"{m_Attribute.Name}=\"{m_Attribute.Value}\"";
+        appender.Append(m_Attribute.Name);
+        appender.Append("=\"");
+
+        if (!string.IsNullOrWhiteSpace(m_Attribute.Value))
+            appender.Append(m_Attribute.Value);
         
-        return result;
+        appender.Append('"');
     }
 }

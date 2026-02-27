@@ -16,7 +16,7 @@ public class ElementEmitterTest
         string expected = "<book></book>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -36,7 +36,7 @@ public class ElementEmitterTest
         string expected = "<price>44.95</price>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -57,7 +57,7 @@ public class ElementEmitterTest
         string expected = "<book id=\"\"></book>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -80,7 +80,7 @@ public class ElementEmitterTest
         string expected = "<test first=\"\" second=\"\"></test>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -104,7 +104,7 @@ public class ElementEmitterTest
 </book>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -131,7 +131,7 @@ public class ElementEmitterTest
 </book>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -172,7 +172,7 @@ public class ElementEmitterTest
 </catalog>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();

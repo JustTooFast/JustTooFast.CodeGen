@@ -5,7 +5,7 @@ using System;
 using System.Text;
 
 namespace JustTooFast.CodeGen.SampleXml;
-public partial class ElementEmitter
+public partial class ElementEmitter : IEmitter
 {
     private partial void Validate()
     {
@@ -13,59 +13,46 @@ public partial class ElementEmitter
             throw new Exception("Element Name is required.");
     }
 
-    public string Generate()
+    public void EmitTo(IAppender appender)
     {
-        StringBuilder sb = new();
-
-        sb.Append($"<{m_Element.Name}");
+        appender.Append('<');
+        appender.Append(m_Element.Name);
         
         foreach (AttributeModel attribute in m_Element.Attributes)
         {
+            appender.Append(' ');
             AttributeEmitter ae = new(attribute);
-            sb.Append($" {ae.Generate()}");
+            ae.EmitTo(appender);
         }
 
-        sb.Append('>');
-
+        appender.Append('>');
 
         if (!string.IsNullOrWhiteSpace(m_Element.Text))
         {
-            sb.Append(m_Element.Text);
+            appender.Append(m_Element.Text);
         }
         else
         {
-            foreach (ElementModel element in m_Element.Elements)
-            {
-                ElementEmitter ee = new(element);
-                sb.AppendLine()
-                    .Append(Indent(ee.Generate()));
-            }
-
             if (m_Element.Elements.Count > 0)
-                sb.AppendLine();
+            {
+                appender.AppendLine();
+
+                var indented = new IndentedAppender(appender, "  ");
+
+                for (int i = 0; i < m_Element.Elements.Count; i++)
+                {
+                    new ElementEmitter(m_Element.Elements[i]).EmitTo(indented);
+
+                    if (i < m_Element.Elements.Count - 1)
+                        indented.AppendLine();
+                }
+
+                appender.AppendLine(); // end of children block
+            }
         }
 
-        sb.Append($"</{m_Element.Name}>");
-
-        string result = sb.ToString();
-
-        return result;
-    }
-
-    private string Indent(string str)
-    {
-        StringBuilder sb = new();
-
-        string[] lines = str.Split(Environment.NewLine);
-
-        for (int i = 0; i < lines.Length; i++)
-        {
-            sb.Append($"  {lines[i]}");
-
-            if (i < lines.Length - 1)
-                sb.AppendLine();
-        }
-
-        return sb.ToString();
+        appender.Append("</");
+        appender.Append(m_Element.Name);
+        appender.Append('>');
     }
 }

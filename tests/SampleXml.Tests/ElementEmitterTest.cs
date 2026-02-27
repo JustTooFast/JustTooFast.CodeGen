@@ -19,8 +19,10 @@ public class ElementEmitterTest
         string expected = "<test></test>";
 
         //Act
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
-        string actual = target.Generate();
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -37,8 +39,10 @@ public class ElementEmitterTest
         string expected = "<myElement>Hello, World!</myElement>";
 
         //Act
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
-        string actual = target.Generate();
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -56,8 +60,10 @@ public class ElementEmitterTest
         string expected = "<myElement myAttribute=\"\"></myElement>";
 
         //Act
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
-        string actual = target.Generate();
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -77,8 +83,10 @@ public class ElementEmitterTest
         string expected = "<test first=\"\" second=\"\"></test>";
 
         //Act
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
-        string actual = target.Generate();
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -100,8 +108,10 @@ public class ElementEmitterTest
             .ToString();
 
         //Act
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
-        string actual = target.Generate();
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -126,8 +136,10 @@ public class ElementEmitterTest
             .ToString();
 
         //Act
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
-        string actual = target.Generate();
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -166,8 +178,10 @@ public class ElementEmitterTest
             .ToString();
 
         //Act
+        IAppender appender = new Appender("\n");
         ElementEmitter target = new(builder);
-        string actual = target.Generate();
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);

@@ -18,8 +18,10 @@ public class AttributeEmitterTest
         string expected = "test=\"\"";
 
         //Act
+        IAppender appender = new Appender("\n");
         AttributeEmitter target = new(builder);
-        string actual = target.Generate();
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -36,8 +38,10 @@ public class AttributeEmitterTest
         string expected = "myName=\"myValue\"";
 
         //Act
+        IAppender appender = new Appender("\n");
         AttributeEmitter target = new(builder);
-        string actual = target.Generate();
+        target.EmitTo(appender);
+        string actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);

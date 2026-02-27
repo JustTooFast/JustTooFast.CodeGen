@@ -18,7 +18,7 @@ public class AttributeEmitterTest
         string expected = "id=\"\"";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         AttributeEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -38,7 +38,7 @@ public class AttributeEmitterTest
         string expected = "id=\"bk101\"";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         AttributeEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();

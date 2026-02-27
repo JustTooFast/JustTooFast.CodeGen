@@ -19,7 +19,7 @@ public class XmlFileEmitterTest
 <catalog></catalog>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         XmlFileEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -44,7 +44,7 @@ public class XmlFileEmitterTest
 <catalog></catalog>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         XmlFileEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();

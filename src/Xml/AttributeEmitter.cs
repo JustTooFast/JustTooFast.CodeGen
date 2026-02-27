@@ -12,11 +12,12 @@ public partial class AttributeEmitter : IEmitter
 
     public void EmitTo(IAppender appender)
     {
-        appender.Append($"{m_Attribute.Name}=\"");
+        appender.Append(m_Attribute.Name);
+        appender.Append("=\"");
 
         if (!string.IsNullOrWhiteSpace(m_Attribute.Value))
-            appender.Append(m_Attribute.Value);
+            appender.AppendXmlAttributeValueEscaped(m_Attribute.Value);
 
-        appender.Append('\"'); 
+        appender.Append('"'); 
     }
 }

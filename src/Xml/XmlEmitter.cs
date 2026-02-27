@@ -19,10 +19,18 @@ public partial class XmlEmitter : IEmitter
         appender.Append("<?xml version=\"1.0\"");
 
         if (m_Xml.Encoding != null)
-            appender.Append($" encoding=\"{m_Xml.Encoding}\"");
+        {
+            appender.Append(" encoding=\"");
+            appender.Append(m_Xml.Encoding);
+            appender.Append('"');
+        }
 
         if (m_Xml.Standalone != null)
-            appender.Append($" standalone=\"{m_Xml.Standalone}\"");
+        {
+            appender.Append(" standalone=\"");
+            appender.Append(m_Xml.Standalone);
+            appender.Append('"');
+        }
 
         appender.Append("?>");
     }

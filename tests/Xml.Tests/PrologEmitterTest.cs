@@ -15,7 +15,7 @@ public class PrologEmitterTest
         string expected = "<?xml version=\"1.0\"?>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         PrologEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -35,7 +35,7 @@ public class PrologEmitterTest
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         PrologEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();

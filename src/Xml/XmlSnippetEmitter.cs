@@ -19,10 +19,9 @@ public partial class XmlSnippetEmitter : IEmitter
             if(isFirst)
                 isFirst = false;
             else
-                appender.AppendLineFeed();
+                appender.AppendLine();
 
-            ElementEmitter elementEmitter = new(element);
-            elementEmitter.EmitTo(appender);
+            new ElementEmitter(element).EmitTo(appender);
         }
     }
 }

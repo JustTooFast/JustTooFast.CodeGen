@@ -16,7 +16,7 @@ public class RootElementEmitterTest
         string expected = "<rootElement></rootElement>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         RootElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -37,7 +37,7 @@ public class RootElementEmitterTest
         string expected = "<rootElement myAttribute=\"\"></rootElement>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         RootElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -60,7 +60,7 @@ public class RootElementEmitterTest
         string expected = "<rootElement first=\"\" second=\"\"></rootElement>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         RootElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -84,7 +84,7 @@ public class RootElementEmitterTest
 </catalog>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         RootElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -111,7 +111,7 @@ public class RootElementEmitterTest
 </catalog>";
 
         //Act
-        IAppender appender = new Appender();
+        IAppender appender = new Appender("\n");
         RootElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();

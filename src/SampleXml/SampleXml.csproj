@@ -22,6 +22,11 @@
     <Compile Include="ElementEmitter.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../Core/Core.csproj" />
+    <ProjectReference Include="../Scaffolder.Cli/Scaffolder.Cli.csproj" />
+  </ItemGroup>
+
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
     <Exec Command="call $(ProjectDir)SampleXml_PreBuild.bat &quot;$(ProjectDir)&quot; &quot;$(OutputPath)&quot; &quot;JustTooFast.CodeGen.SampleXml&quot;" />
   </Target>
