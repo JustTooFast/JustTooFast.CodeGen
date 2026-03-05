@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>JustTooFast.CodeGen.Core</AssemblyName>
-    <RootNamespace>JustTooFast.CodeGen.Core</RootNamespace>
+    <RootNamespace>JustTooFast.CodeGen</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

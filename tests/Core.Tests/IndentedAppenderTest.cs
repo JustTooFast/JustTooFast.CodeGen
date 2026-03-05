@@ -12,7 +12,8 @@ public class IndentedAppenderTest
     public void Append_SingleLine_IndentsOnce()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -26,7 +27,8 @@ public class IndentedAppenderTest
     public void Append_TwoCallsSameLine_IndentOnlyOnce()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -41,7 +43,8 @@ public class IndentedAppenderTest
     public void Append_WithLfInString_IndentsAfterNewline()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -55,7 +58,8 @@ public class IndentedAppenderTest
     public void Append_WithCrLfInString_IndentsAfterCrLf()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -69,7 +73,8 @@ public class IndentedAppenderTest
     public void Append_WithCrOnlyInString_IndentsAfterCr()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -83,7 +88,8 @@ public class IndentedAppenderTest
     public void Append_StringEndsWithNewline_NextAppendIsIndented()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -98,7 +104,8 @@ public class IndentedAppenderTest
     public void Append_EmptyOrNullString_DoesNothing()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -113,7 +120,8 @@ public class IndentedAppenderTest
     public void Append_EmptySpan_DoesNothing()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -127,7 +135,8 @@ public class IndentedAppenderTest
     public void Append_WithSpanContainingNewlines_IndentsAfterNewline()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -142,7 +151,8 @@ public class IndentedAppenderTest
     public void Append_CharNewline_SetsLineStartForNextAppend()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -158,7 +168,8 @@ public class IndentedAppenderTest
     public void AppendLine_NoArgs_IndentsNextLine()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -174,7 +185,8 @@ public class IndentedAppenderTest
     public void AppendLine_NoArgs_AppendsOnlyNewline()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -188,7 +200,8 @@ public class IndentedAppenderTest
     public void AppendLine_WithNullString_AppendsOnlyNewline()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -202,7 +215,8 @@ public class IndentedAppenderTest
     public void AppendLine_WithEmptyString_AppendsOnlyNewline()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -216,7 +230,8 @@ public class IndentedAppenderTest
     public void AppendLine_WithString_IndentsContentAndAddsNewline()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -230,7 +245,8 @@ public class IndentedAppenderTest
     public void AppendLine_WithSpan_IndentsContentAndAddsNewline()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -244,7 +260,8 @@ public class IndentedAppenderTest
     public void AppendLine_TwoLines_AppendsIndentOnEachLine()
     {
         // Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender target = new IndentedAppender(inner, "  ");
 
         // Act
@@ -259,7 +276,8 @@ public class IndentedAppenderTest
     public void AppendLine_WithStringContainingNewline_IndentsEachLineAndAddsTrailingNewline()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "  ");
 
         //Act
@@ -273,7 +291,8 @@ public class IndentedAppenderTest
     public void Append_ThenAppendLineValue_IndentOnceAndAddsNewline()
     {
         // Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender target = new IndentedAppender(inner, "  ");
 
         // Act
@@ -288,7 +307,8 @@ public class IndentedAppenderTest
     public void AppendLine_ThenAppend_IndentsAfterLineBreak()
     {
         // Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender target = new IndentedAppender(inner, "  ");
 
         // Act
@@ -303,7 +323,8 @@ public class IndentedAppenderTest
     public void Append_CustomIndent_IsUsed()
     {
         //Arrange
-        IAppender inner = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender inner = new StringBuilderAppender(formatting: fmt);
         IAppender indented = new IndentedAppender(inner, "--");
 
         //Act

@@ -2,10 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 using System;
-using System.Text;
 
 namespace JustTooFast.CodeGen.SampleXml;
-public partial class ElementEmitter : IEmitter
+public partial class ElementEmitter
 {
     private partial void Validate()
     {
@@ -13,7 +12,7 @@ public partial class ElementEmitter : IEmitter
             throw new Exception("Element Name is required.");
     }
 
-    public void EmitTo(IAppender appender)
+    public partial void EmitTo(IAppender appender)
     {
         appender.Append('<');
         appender.Append(m_Element.Name);

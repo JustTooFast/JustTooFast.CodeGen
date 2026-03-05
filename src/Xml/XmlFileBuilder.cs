@@ -4,11 +4,6 @@
 namespace JustTooFast.CodeGen.Xml;
 public partial class XmlFileBuilder
 {
-    public static implicit operator XmlFileGenerator(XmlFileBuilder builder)
-    {
-        return new XmlFileGenerator(builder.m_XmlFile);
-    }
-
     public XmlFileBuilder WithDisableProlog(bool disableProlog)
     {
         m_XmlFile.DisableProlog = disableProlog;
@@ -16,8 +11,5 @@ public partial class XmlFileBuilder
         return this;
     }
 
-    public XmlFileBuilder AsDisableProlog()
-    {
-        return WithDisableProlog(true);
-    }
+    public XmlFileBuilder AsDisableProlog() => WithDisableProlog(true);
 }

@@ -19,7 +19,8 @@ public class ElementEmitterTest
         string expected = "<test></test>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -39,7 +40,8 @@ public class ElementEmitterTest
         string expected = "<myElement>Hello, World!</myElement>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -60,7 +62,8 @@ public class ElementEmitterTest
         string expected = "<myElement myAttribute=\"\"></myElement>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -83,7 +86,8 @@ public class ElementEmitterTest
         string expected = "<test first=\"\" second=\"\"></test>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -108,7 +112,8 @@ public class ElementEmitterTest
             .ToString();
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -136,7 +141,8 @@ public class ElementEmitterTest
             .ToString();
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -178,7 +184,8 @@ public class ElementEmitterTest
             .ToString();
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         ElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();

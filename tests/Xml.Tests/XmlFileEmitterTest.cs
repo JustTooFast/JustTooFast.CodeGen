@@ -19,7 +19,8 @@ public class XmlFileEmitterTest
 <catalog></catalog>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         XmlFileEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -34,8 +35,8 @@ public class XmlFileEmitterTest
         //Arrange
         XmlFileBuilder builder = new XmlFileBuilder()
             .WithProlog(x => x
-                .WithXml(y => y
-                    .WithEncoding(Encoding.UTF_8)))
+                .WithXmlDeclaration(y => y
+                    .WithEncoding(XmlEncoding.UTF_8)))
             .WithRootElement(x => x
                 .WithName("catalog"));
         
@@ -44,7 +45,8 @@ public class XmlFileEmitterTest
 <catalog></catalog>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         XmlFileEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -70,12 +72,12 @@ public class XmlFileEmitterTest
         string expected = "<catalog></catalog>";
 
         //Act
-        IAppender appender1 = new Appender();
+        IAppender appender1 = new StringBuilderAppender();
         XmlFileEmitter target1 = new(builder1);
         target1.EmitTo(appender1);
         string actual1 = appender1.ToString();
 
-        IAppender appender2 = new Appender();
+        IAppender appender2 = new StringBuilderAppender();
         XmlFileEmitter target2 = new(builder2);
         target2.EmitTo(appender2);
         string actual2 = appender2.ToString();

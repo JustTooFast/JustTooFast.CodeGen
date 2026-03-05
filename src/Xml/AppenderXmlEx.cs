@@ -23,8 +23,7 @@ public static class AppenderXmlEx
 
         for (int i = 0; i < s.Length; i++)
         {
-            //string? repl = s[i] switch    //TO-DO: nullable enable
-            string repl = s[i] switch
+            string? repl = s[i] switch
             {
                 '&' => "&amp;",
                 '<' => "&lt;",

@@ -4,6 +4,7 @@
 using System;
 
 namespace JustTooFast.CodeGen;
+
 public interface IAppender
 {
     void Append(string? value);
@@ -12,5 +13,6 @@ public interface IAppender
 
     void AppendLine();
     void AppendLine(string? value);
+    void AppendLine(char value);
     void AppendLine(ReadOnlySpan<char> value);
 }

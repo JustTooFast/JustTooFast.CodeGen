@@ -10,13 +10,14 @@ public class XmlEmitterTest
     public void EmitTo_WithDefaultVersion_ReturnVersion()
     {
         //Arrange
-        XmlBuilder builder = new();
+        XmlDeclarationBuilder builder = new();
         
         string expected = "<?xml version=\"1.0\"?>";
 
         //Act
-        IAppender appender = new Appender("\n");
-        XmlEmitter target = new(builder);
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
+        XmlDeclarationEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
 
@@ -28,14 +29,15 @@ public class XmlEmitterTest
     public void EmitTo_WithEncoding_ReturnEncoding()
     {
         //Arrange
-        XmlBuilder builder = new XmlBuilder()
+        XmlDeclarationBuilder builder = new XmlDeclarationBuilder()
             .WithEncoding("UTF-8");
         
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
         //Act
-        IAppender appender = new Appender("\n");
-        XmlEmitter target = new(builder);
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
+        XmlDeclarationEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
 
@@ -47,14 +49,15 @@ public class XmlEmitterTest
     public void EmitTo_WithEncodingEnum_ReturnEncoding()
     {
         //Arrange
-        XmlBuilder builder = new XmlBuilder()
-            .WithEncoding(Encoding.UTF_8);
+        XmlDeclarationBuilder builder = new XmlDeclarationBuilder()
+            .WithEncoding(XmlEncoding.UTF_8);
         
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
         //Act
-        IAppender appender = new Appender("\n");
-        XmlEmitter target = new(builder);
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
+        XmlDeclarationEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
 
@@ -66,14 +69,15 @@ public class XmlEmitterTest
     public void EmitTo_WithStandalone_ReturnStandalone()
     {
         //Arrange
-        XmlBuilder builder = new XmlBuilder()
+        XmlDeclarationBuilder builder = new XmlDeclarationBuilder()
             .WithStandalone("yes");
         
         string expected = "<?xml version=\"1.0\" standalone=\"yes\"?>";
 
         //Act
-        IAppender appender = new Appender("\n");
-        XmlEmitter target = new(builder);
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
+        XmlDeclarationEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
 
@@ -85,14 +89,15 @@ public class XmlEmitterTest
     public void EmitTo_WithStandaloneEnum_ReturnStandalone()
     {
         //Arrange
-        XmlBuilder builder = new XmlBuilder()
-            .WithStandalone(Standalone.Yes);
+        XmlDeclarationBuilder builder = new XmlDeclarationBuilder()
+            .WithStandalone(XmlStandalone.Yes);
         
         string expected = "<?xml version=\"1.0\" standalone=\"yes\"?>";
 
         //Act
-        IAppender appender = new Appender("\n");
-        XmlEmitter target = new(builder);
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
+        XmlDeclarationEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
 
@@ -104,15 +109,16 @@ public class XmlEmitterTest
     public void EmitTo_WithAllParametersDefined_ReturnAllParameters()
     {
         //Arrange
-        XmlBuilder builder = new XmlBuilder()
-            .WithEncoding(Encoding.UTF_8)
-            .WithStandalone(Standalone.Yes);
+        XmlDeclarationBuilder builder = new XmlDeclarationBuilder()
+            .WithEncoding(XmlEncoding.UTF_8)
+            .WithStandalone(XmlStandalone.Yes);
         
         string expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
 
         //Act
-        IAppender appender = new Appender("\n");
-        XmlEmitter target = new(builder);
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
+        XmlDeclarationEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
 
@@ -125,10 +131,10 @@ public class XmlEmitterTest
     public void Validate_InvalidStandaloneValue_ThrowException()
     {
         //Arrange
-        XmlBuilder builder = new XmlBuilder()
+        XmlDeclarationBuilder builder = new XmlDeclarationBuilder()
             .WithStandalone("awesome");
 
         //Act
-        XmlEmitter target = new(builder);
+        XmlDeclarationEmitter target = new(builder);
     }
 }

@@ -16,7 +16,8 @@ public class RootElementEmitterTest
         string expected = "<rootElement></rootElement>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         RootElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -37,7 +38,8 @@ public class RootElementEmitterTest
         string expected = "<rootElement myAttribute=\"\"></rootElement>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         RootElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -60,7 +62,8 @@ public class RootElementEmitterTest
         string expected = "<rootElement first=\"\" second=\"\"></rootElement>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         RootElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -84,7 +87,8 @@ public class RootElementEmitterTest
 </catalog>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         RootElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -111,7 +115,8 @@ public class RootElementEmitterTest
 </catalog>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         RootElementEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();

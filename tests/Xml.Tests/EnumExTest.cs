@@ -11,7 +11,7 @@ public class EnumExTest
     {
         //Arrange
         string expected = "UTF-8";
-        Encoding target = Encoding.UTF_8;
+        XmlEncoding target = XmlEncoding.UTF_8;
 
         //Act
         string actual = target.GetDescription();

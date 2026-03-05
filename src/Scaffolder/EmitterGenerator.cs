@@ -37,12 +37,13 @@ public class EmitterGenerator : IGenerator
 
         //Add usings
         sb.AppendLineFeed("using System;");
+        sb.AppendLineFeed("using JustTooFast.CodeGen;");
 
         sb.AppendLineFeed();
 
         //Add namespace and class
         sb.AppendLineFeed($"namespace {m_TargetNamespace};")
-            .AppendLineFeed($"public partial class {m_Entity.Name}Emitter")
+            .AppendLineFeed($"public partial class {m_Entity.Name}Emitter : IEmitter")
             .AppendLineFeed("{");
 
         //Add field for model
@@ -59,6 +60,11 @@ public class EmitterGenerator : IGenerator
             .AppendLineFeed("        Validate();")
             .AppendLineFeed("    }");
 
+        sb.AppendLineFeed();
+
+        //Add EmitTo method stub
+        sb.AppendLineFeed("    public partial void EmitTo(IAppender appender);");
+        
         sb.AppendLineFeed();
 
         //Add validate method stub

@@ -18,7 +18,8 @@ public class AttributeEmitterTest
         string expected = "test=\"\"";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         AttributeEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -38,7 +39,8 @@ public class AttributeEmitterTest
         string expected = "myName=\"myValue\"";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         AttributeEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();

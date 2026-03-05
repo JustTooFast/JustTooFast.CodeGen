@@ -10,7 +10,8 @@ public class AppenderXmlExTest
     public void AppendXmlTextEscaped_NoSpecialChars_AppendsUnchanged()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
         string input = "hello world 123";
 
         //Act
@@ -24,7 +25,8 @@ public class AppenderXmlExTest
     public void AppendXmlTextEscaped_EscapesAmpLtGt_ButNotQuotes()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
         string input = "a&b<c>d\"e'f";
 
         //Act
@@ -39,7 +41,8 @@ public class AppenderXmlExTest
     public void AppendXmlAttributeValueEscaped_EscapesAmpLtGtAndQuotes()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
         string input = "a&b<c>d\"e'f";
 
         //Act
@@ -53,7 +56,8 @@ public class AppenderXmlExTest
     public void AppendXmlTextEscaped_OnlyQuotes_InputUnchanged()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
         string input = "\"'";
 
         //Act
@@ -67,7 +71,8 @@ public class AppenderXmlExTest
     public void AppendXmlAttributeValueEscaped_OnlyQuotes_EscapesBoth()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
         string input = "\"'";
 
         //Act
@@ -81,7 +86,8 @@ public class AppenderXmlExTest
     public void AppendXmlTextEscaped_EmptyString_AppendsEmpty()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
 
         //Act
         a.AppendXmlTextEscaped(string.Empty);
@@ -94,7 +100,8 @@ public class AppenderXmlExTest
     public void AppendXmlAttributeValueEscaped_EmptyString_AppendsEmpty()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
 
         //Act
         a.AppendXmlAttributeValueEscaped(string.Empty);
@@ -107,7 +114,8 @@ public class AppenderXmlExTest
     public void AppendXmlTextEscaped_MultipleEscapes_ProducesExpectedOutput()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
         string input = "&&<<>>";
 
         //Act
@@ -121,7 +129,8 @@ public class AppenderXmlExTest
     public void AppendXmlAttributeValueEscaped_MultipleEscapes_ProducesExpectedOutput()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
         string input = "&&<<>>\"\"''";
 
         //Act
@@ -135,7 +144,8 @@ public class AppenderXmlExTest
     public void AppendXmlTextEscaped_MixedContent_EscapesAndPreservesOtherChars()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
         string input = "ab&cd<ef>gh";
 
         //Act
@@ -149,7 +159,8 @@ public class AppenderXmlExTest
     public void AppendXmlAttributeValueEscaped_MixedContent_EscapesAndPreservesOtherChars()
     {
         //Arrange
-        IAppender a = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender a = new StringBuilderAppender(formatting: fmt);
         string input = "ab&cd<ef>g\"h'i";
 
         //Act

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class XmlSnippetEmitter : IEmitter
+public partial class XmlSnippetEmitter
 {
     private partial void Validate()
     {
@@ -10,8 +10,18 @@ public partial class XmlSnippetEmitter : IEmitter
             throw new XmlFormatException("XmlSnippet missing Elements.");
     }
 
-    public void EmitTo(IAppender appender)
+    public partial void EmitTo(IAppender appender)
     {
+        // If caller already provided formatting, don't override.
+        IAppender a = appender;
+
+        if (appender is not IHasFormatting<IFormatting>)
+        {
+            var formatting = Formatting.Default;
+
+            a = new FormattingAppender(appender, formatting);
+        }
+
         bool isFirst = true;
         foreach (ElementModel element in m_XmlSnippet.Elements)
         {

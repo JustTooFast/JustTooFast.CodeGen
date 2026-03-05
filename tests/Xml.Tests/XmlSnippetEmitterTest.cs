@@ -17,7 +17,8 @@ public class XmlSnippetEmitterTest
         string expected = "<book></book>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         XmlSnippetEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();
@@ -41,7 +42,8 @@ public class XmlSnippetEmitterTest
 <book></book>";
 
         //Act
-        IAppender appender = new Appender("\n");
+        var fmt = new Formatting(newLine: "\n");
+        IAppender appender = new StringBuilderAppender(formatting: fmt);
         XmlSnippetEmitter target = new(builder);
         target.EmitTo(appender);
         string actual = appender.ToString();

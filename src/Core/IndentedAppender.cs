@@ -5,23 +5,34 @@ using System;
 
 namespace JustTooFast.CodeGen;
 
-public sealed class IndentedAppender : IAppender
+public sealed class IndentedAppender : IAppender, IHasFormatting<IFormatting>
 {
     private readonly IAppender _inner;
-    private readonly string _indent;
+    private readonly string _indentUnit;
     private bool _atLineStart = true;
 
-    public IndentedAppender(IAppender inner, string indent = "  ")
+    public IFormatting Formatting { get; }
+
+    public IndentedAppender(IAppender inner, string? indentUnitOverride = null)
     {
         _inner = inner ?? throw new ArgumentNullException(nameof(inner));
-        _indent = indent ?? throw new ArgumentNullException(nameof(indent));
+
+        // Preserve formatting through wrapper chains if available.
+        Formatting = (inner as IHasFormatting<IFormatting>)?.Formatting
+            ?? CodeGen.Formatting.Default;
+
+        // Indent unit resolution:
+        // - if caller explicitly provided indentOverride, use it
+        // - else use formatting's indent unit (propagated through wrappers)
+        // - else default
+        _indentUnit = indentUnitOverride ?? Formatting.IndentUnit ?? "  ";
     }
 
     private void WriteIndentIfNeeded()
     {
         if (_atLineStart)
         {
-            _inner.Append(_indent);
+            _inner.Append(_indentUnit);
             _atLineStart = false;
         }
     }
@@ -116,6 +127,12 @@ public sealed class IndentedAppender : IAppender
     {
         if (!string.IsNullOrEmpty(value))
             Append(value);
+        AppendLine();
+    }
+
+    public void AppendLine(char value)
+    {
+        Append(value);
         AppendLine();
     }
 

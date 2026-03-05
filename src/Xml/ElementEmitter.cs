@@ -2,19 +2,21 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class ElementEmitter : IEmitter
+public partial class ElementEmitter
 {
     private partial void Validate()
     {
         if (string.IsNullOrWhiteSpace(m_Element.Name))
-            throw new XmlFormatException("Element Name is required.");
+            throw new XmlFormatException("Element.Name is required.");
 
         if ((m_Element.Text != null) && (m_Element.Elements.Count > 0))
             throw new XmlFormatException("Element cannot have both Text and Child Elements.");
     }
     
-    public void EmitTo(IAppender appender)
+    public partial void EmitTo(IAppender appender)
     {
+        var fmt = (appender as IHasFormatting<IFormatting>)?.Formatting ?? Formatting.Default;
+
         appender.Append('<');
         appender.Append(m_Element.Name);
 
@@ -35,7 +37,7 @@ public partial class ElementEmitter : IEmitter
             appender.AppendLine();
 
             // children should be indented relative to current line
-            IAppender indented = new IndentedAppender(appender, XmlFormatting.IndentUnit);
+            IAppender indented = new IndentedAppender(appender);
 
             for (int i = 0; i < m_Element.Elements.Count; i++)
             {

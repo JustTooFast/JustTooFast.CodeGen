@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class AttributeEmitter : IEmitter
+public partial class AttributeEmitter
 {
     private partial void Validate()
     {
         if (string.IsNullOrWhiteSpace(m_Attribute.Name))
-            throw new XmlFormatException("Attribute Name is required.");
+            throw new XmlFormatException("Attribute.Name is required.");
     }
 
-    public void EmitTo(IAppender appender)
+    public partial void EmitTo(IAppender appender)
     {
         appender.Append(m_Attribute.Name);
         appender.Append("=\"");

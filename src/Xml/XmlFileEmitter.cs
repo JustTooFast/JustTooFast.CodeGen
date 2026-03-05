@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class XmlFileEmitter : IEmitter
+public partial class XmlFileEmitter
 {
     private partial void Validate()
     {
@@ -10,11 +10,21 @@ public partial class XmlFileEmitter : IEmitter
         m_XmlFile.Prolog ??= new PrologModel();
 
         if (m_XmlFile.RootElement == null)
-            throw new XmlFormatException("XmlFile RootElement is required.");
+            throw new XmlFormatException("XmlFile.RootElement is required.");
     }
 
-    public void EmitTo(IAppender appender)
+    public partial void EmitTo(IAppender appender)
     {
+        // If caller already provided formatting, don't override.
+        IAppender a = appender;
+
+        if (appender is not IHasFormatting<IFormatting>)
+        {
+            var formatting = Formatting.Default;
+
+            a = new FormattingAppender(appender, formatting);
+        }
+
         if (!m_XmlFile.DisableProlog)
         {
             new PrologEmitter(m_XmlFile.Prolog).EmitTo(appender);

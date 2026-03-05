@@ -15,9 +15,10 @@ public class EmitterGeneratorTest
 
         string expected =
 @"using System;
+using JustTooFast.CodeGen;
 
 namespace MyNamespace;
-public partial class TestEmitter
+public partial class TestEmitter : IEmitter
 {
     private readonly TestModel m_Test;
 
@@ -27,6 +28,8 @@ public partial class TestEmitter
 
         Validate();
     }
+
+    public partial void EmitTo(IAppender appender);
 
     private partial void Validate();
 }

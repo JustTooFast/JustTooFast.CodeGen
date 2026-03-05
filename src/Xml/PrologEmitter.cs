@@ -2,17 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 
 namespace JustTooFast.CodeGen.Xml;
-public partial class PrologEmitter : IEmitter
+public partial class PrologEmitter
 {
     private partial void Validate()
     {
         //Ensure Xml is initialized
-        m_Prolog.Xml ??= new XmlModel();
+        m_Prolog.XmlDeclaration ??= new XmlDeclarationModel();
     }
 
-    public void EmitTo(IAppender appender)
+    public partial void EmitTo(IAppender appender)
     {
-        XmlEmitter xmlEmitter = new(m_Prolog.Xml);
-        xmlEmitter.EmitTo(appender);
+        new XmlDeclarationEmitter(m_Prolog.XmlDeclaration).EmitTo(appender);
     }
 }

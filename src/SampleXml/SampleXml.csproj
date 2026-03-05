@@ -3,32 +3,24 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>JustTooFast.CodeGen.SampleXml</AssemblyName>
     <RootNamespace>JustTooFast.CodeGen.SampleXml</RootNamespace>
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
-
-    <!-- Generated files -->
-    <Compile Include="Output\*.gen.cs" />
-
-    <Compile Include="AttributeEmitter.cs" />
-    <Compile Include="ElementEmitter.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../Core/Core.csproj" />
     <ProjectReference Include="../Scaffolder.Cli/Scaffolder.Cli.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
+  </ItemGroup>
+
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
-    <Exec Command="call $(ProjectDir)SampleXml_PreBuild.bat &quot;$(ProjectDir)&quot; &quot;$(OutputPath)&quot; &quot;JustTooFast.CodeGen.SampleXml&quot;" />
+    <Exec Command="call $(ProjectDir)PreBuild.bat &quot;$(ProjectDir)&quot; &quot;$(OutputPath)&quot; &quot;JustTooFast.CodeGen.SampleXml&quot;" />
   </Target>
 
   <Target Name="PreBuild_unix" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Unix' ">
