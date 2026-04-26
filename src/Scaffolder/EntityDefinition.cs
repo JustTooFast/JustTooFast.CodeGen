@@ -6,11 +6,11 @@ using System.Collections.Generic;
 namespace JustTooFast.CodeGen.Scaffolder;
 
 /// <summary>
-/// Holds the data points used by <see cref="BuilderGenerator"/>,
-/// <see cref="ModelGenerator"/>, and <see cref="EmitterGenerator"/>
+/// Holds the data points used by <see cref="BuilderSourceEmitter"/>,
+/// <see cref="ModelSourceEmitter"/>, and <see cref="EmitterSourceEmitter"/>
 /// to generate Builder, Model, and Emitter classes.
 /// </summary>
-public class BidEntity
+public class EntityDefinition
 {
     private readonly List<string> m_Attributes = new();
     private readonly List<string> m_Entities = new();

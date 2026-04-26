@@ -10,17 +10,17 @@ public class RootElementEmitterTest
     public void EmitTo_WithName_ReturnWithName()
     {
         //Arrange
-        RootElementBuilder builder = new RootElementBuilder()
+        var builder = new RootElementBuilder()
             .WithName("rootElement");
         
-        string expected = "<rootElement></rootElement>";
+        var expected = "<rootElement></rootElement>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        RootElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new RootElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -30,19 +30,19 @@ public class RootElementEmitterTest
     public void EmitTo_WithSingleAttribute_ReturnWithAttribute()
     {
         //Arrange
-        RootElementBuilder builder = new RootElementBuilder()
+        var builder = new RootElementBuilder()
             .WithName("rootElement")
             .WithAttribute(x => x
                 .WithName("myAttribute"));
         
-        string expected = "<rootElement myAttribute=\"\"></rootElement>";
+        var expected = "<rootElement myAttribute=\"\"></rootElement>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        RootElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new RootElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -52,21 +52,21 @@ public class RootElementEmitterTest
     public void EmitTo_With2Attributes_ReturnWithAttributes()
     {
         //Arrange
-        RootElementBuilder builder = new RootElementBuilder()
+        var builder = new RootElementBuilder()
             .WithName("rootElement")
             .WithAttribute(x => x
                 .WithName("first"))
             .WithAttribute(x => x
                 .WithName("second"));
         
-        string expected = "<rootElement first=\"\" second=\"\"></rootElement>";
+        var expected = "<rootElement first=\"\" second=\"\"></rootElement>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        RootElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new RootElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -76,22 +76,22 @@ public class RootElementEmitterTest
     public void EmitTo_WithChildElement_ReturnChildElement()
     {
         //Arrange
-        RootElementBuilder builder = new RootElementBuilder()
+        var builder = new RootElementBuilder()
             .WithName("catalog")
             .WithElement(x => x
                 .WithName("book"));
         
-        string expected =
+        var expected =
 @"<catalog>
   <book></book>
 </catalog>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        RootElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new RootElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -101,14 +101,14 @@ public class RootElementEmitterTest
     public void EmitTo_With2ChildElements_ReturnChildElements()
     {
         //Arrange
-        RootElementBuilder builder = new RootElementBuilder()
+        var builder = new RootElementBuilder()
             .WithName("catalog")
             .WithElement(x => x
                 .WithName("book"))
             .WithElement(x => x
                 .WithName("book"));
         
-        string expected =
+        var expected =
 @"<catalog>
   <book></book>
   <book></book>
@@ -116,10 +116,10 @@ public class RootElementEmitterTest
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        RootElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new RootElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -130,9 +130,9 @@ public class RootElementEmitterTest
     public void Validate_MissingName_ThrowException()
     {
         //Arrange
-        RootElementBuilder builder = new();
+        var builder = new RootElementBuilder();
 
         //Act
-        RootElementEmitter target = new(builder);
+        var target = new RootElementEmitter(builder);
     }
 }

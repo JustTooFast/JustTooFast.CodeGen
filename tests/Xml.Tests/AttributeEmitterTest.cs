@@ -1,8 +1,6 @@
 // Copyright 2023-2026 Matthew Yancer
 // SPDX-License-Identifier: Apache-2.0
 
-using System;
-
 namespace JustTooFast.CodeGen.Xml.Tests;
 
 [TestClass]
@@ -12,17 +10,17 @@ public class AttributeEmitterTest
     public void EmitTo_WithName_ReturnNameAndEmptyValue()
     {
         //Arrange
-        AttributeBuilder builder = new AttributeBuilder()
+        var builder = new AttributeBuilder()
             .WithName("id");
         
-        string expected = "id=\"\"";
+        var expected = "id=\"\"";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        AttributeEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new AttributeEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -32,18 +30,18 @@ public class AttributeEmitterTest
     public void EmitTo_WithNameAndValue_ReturnNameAndValue()
     {
         //Arrange
-        AttributeBuilder builder = new AttributeBuilder()
+        var builder = new AttributeBuilder()
             .WithName("id")
             .WithValue("bk101");
         
-        string expected = "id=\"bk101\"";
+        var expected = "id=\"bk101\"";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        AttributeEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new AttributeEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -54,9 +52,9 @@ public class AttributeEmitterTest
     public void Validate_MissingName_ThrowException()
     {
         //Arrange
-        AttributeBuilder builder = new();
+        var builder = new AttributeBuilder();
 
         //Act
-        AttributeEmitter target = new(builder);
+        var target = new AttributeEmitter(builder);
     }
 }

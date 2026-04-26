@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Reflection;
 
 namespace JustTooFast.CodeGen;
-public static class EnumEx
+public static class EnumExtensions
 {
     public static string GetDescription(this Enum value)
     {

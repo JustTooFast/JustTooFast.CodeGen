@@ -10,20 +10,20 @@ public class XmlFileEmitterTest
     public void EmitTo_WithRootElement_ReturnWithRootElement()
     {
         //Arrange
-        XmlFileBuilder builder = new XmlFileBuilder()
+        var builder = new XmlFileBuilder()
             .WithRootElement(x => x
                 .WithName("catalog"));
         
-        string expected =
+        var expected =
 @"<?xml version=""1.0""?>
 <catalog></catalog>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        XmlFileEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new XmlFileEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -33,23 +33,23 @@ public class XmlFileEmitterTest
     public void EmitTo_WithPrologXmlEncoding_ReturnWithPrologXmlEncoding()
     {
         //Arrange
-        XmlFileBuilder builder = new XmlFileBuilder()
+        var builder = new XmlFileBuilder()
             .WithProlog(x => x
                 .WithXmlDeclaration(y => y
                     .WithEncoding(XmlEncoding.UTF_8)))
             .WithRootElement(x => x
                 .WithName("catalog"));
         
-        string expected =
+        var expected =
 @"<?xml version=""1.0"" encoding=""UTF-8""?>
 <catalog></catalog>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        XmlFileEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new XmlFileEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -59,28 +59,28 @@ public class XmlFileEmitterTest
     public void EmitTo_WithDisableProlog_ReturnWithoutProlog()
     {
         //Arrange
-        XmlFileBuilder builder1 = new XmlFileBuilder()
+        var builder1 = new XmlFileBuilder()
             .WithDisableProlog(true)
             .WithRootElement(x => x
                 .WithName("catalog"));
         
-        XmlFileBuilder builder2 = new XmlFileBuilder()
+        var builder2 = new XmlFileBuilder()
             .AsDisableProlog()
             .WithRootElement(x => x
                 .WithName("catalog"));
         
-        string expected = "<catalog></catalog>";
+        var expected = "<catalog></catalog>";
 
         //Act
-        IAppender appender1 = new StringBuilderAppender();
-        XmlFileEmitter target1 = new(builder1);
+        var appender1 = new StringBuilderAppender();
+        var target1 = new XmlFileEmitter(builder1);
         target1.EmitTo(appender1);
-        string actual1 = appender1.ToString();
+        var actual1 = appender1.ToString();
 
-        IAppender appender2 = new StringBuilderAppender();
-        XmlFileEmitter target2 = new(builder2);
+        var appender2 = new StringBuilderAppender();
+        var target2 = new XmlFileEmitter(builder2);
         target2.EmitTo(appender2);
-        string actual2 = appender2.ToString();
+        var actual2 = appender2.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual1);
@@ -92,9 +92,9 @@ public class XmlFileEmitterTest
     public void Validate_MissingRootElement_ThrowException()
     {
         //Arrange
-        XmlFileBuilder builder = new();
+        var builder = new XmlFileBuilder();
 
         //Act
-        XmlFileEmitter target = new(builder);
+        var target = new XmlFileEmitter(builder);
     }
 }

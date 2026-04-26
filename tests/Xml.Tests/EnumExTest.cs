@@ -10,11 +10,11 @@ public class EnumExTest
     public void GetDescription_ForEncodingEnum_ReturnDescription()
     {
         //Arrange
-        string expected = "UTF-8";
-        XmlEncoding target = XmlEncoding.UTF_8;
+        var expected = "UTF-8";
+        var target = XmlEncoding.UTF_8;
 
         //Act
-        string actual = target.GetDescription();
+        var actual = target.GetDescription();
 
         //Assert
         Assert.AreEqual(expected, actual);

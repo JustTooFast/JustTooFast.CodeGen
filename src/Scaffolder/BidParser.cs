@@ -8,24 +8,24 @@ namespace JustTooFast.CodeGen.Scaffolder;
 
 /// <summary>
 /// Converts from a "bid" domain specific language (DSL)
-/// file into a <see cref="BidEntity"/> object.
+/// file into a <see cref="EntityDefinition"/> object.
 /// </summary>
 public class BidParser : IBidParser
 {
     /// <summary>
     /// Parses file formatted with "bid" DSL into a
-    /// <see cref="BidEntity"/> object.
+    /// <see cref="EntityDefinition"/> object.
     /// </summary>
     /// <param name="file">The "bid" DSL file to parse.</param>
-    /// <returns>The resulting <see cref="BidEntity"/> object.</returns>
-    public BidEntity Parse(File file)
+    /// <returns>The resulting <see cref="EntityDefinition"/> object.</returns>
+    public EntityDefinition Parse(File file)
     {
         if(file == null)
             throw new ArgumentNullException(nameof(file));
         if(string.IsNullOrEmpty(file.Path))
             throw new ArgumentException("Required argument: file.Path");
 
-        BidEntity result = new();
+        EntityDefinition result = new();
 
         //Get the entity name
         //The file name represents the entity name

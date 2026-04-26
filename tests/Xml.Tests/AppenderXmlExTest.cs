@@ -11,8 +11,8 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
-        string input = "hello world 123";
+        var a = new StringBuilderAppender(formatting: fmt);
+        var input = "hello world 123";
 
         //Act
         a.AppendXmlTextEscaped(input);
@@ -26,8 +26,8 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
-        string input = "a&b<c>d\"e'f";
+        var a = new StringBuilderAppender(formatting: fmt);
+        var input = "a&b<c>d\"e'f";
 
         //Act
         a.AppendXmlTextEscaped(input);
@@ -42,8 +42,8 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
-        string input = "a&b<c>d\"e'f";
+        var a = new StringBuilderAppender(formatting: fmt);
+        var input = "a&b<c>d\"e'f";
 
         //Act
         a.AppendXmlAttributeValueEscaped(input);
@@ -57,8 +57,8 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
-        string input = "\"'";
+        var a = new StringBuilderAppender(formatting: fmt);
+        var input = "\"'";
 
         //Act
         a.AppendXmlTextEscaped(input);
@@ -72,8 +72,8 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
-        string input = "\"'";
+        var a = new StringBuilderAppender(formatting: fmt);
+        var input = "\"'";
 
         //Act
         a.AppendXmlAttributeValueEscaped(input);
@@ -87,7 +87,7 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
+        var a = new StringBuilderAppender(formatting: fmt);
 
         //Act
         a.AppendXmlTextEscaped(string.Empty);
@@ -101,7 +101,7 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
+        var a = new StringBuilderAppender(formatting: fmt);
 
         //Act
         a.AppendXmlAttributeValueEscaped(string.Empty);
@@ -115,8 +115,8 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
-        string input = "&&<<>>";
+        var a = new StringBuilderAppender(formatting: fmt);
+        var input = "&&<<>>";
 
         //Act
         a.AppendXmlTextEscaped(input);
@@ -130,8 +130,8 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
-        string input = "&&<<>>\"\"''";
+        var a = new StringBuilderAppender(formatting: fmt);
+        var input = "&&<<>>\"\"''";
 
         //Act
         a.AppendXmlAttributeValueEscaped(input);
@@ -145,8 +145,8 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
-        string input = "ab&cd<ef>gh";
+        var a = new StringBuilderAppender(formatting: fmt);
+        var input = "ab&cd<ef>gh";
 
         //Act
         a.AppendXmlTextEscaped(input);
@@ -160,8 +160,8 @@ public class AppenderXmlExTest
     {
         //Arrange
         var fmt = new Formatting(newLine: "\n");
-        IAppender a = new StringBuilderAppender(formatting: fmt);
-        string input = "ab&cd<ef>g\"h'i";
+        var a = new StringBuilderAppender(formatting: fmt);
+        var input = "ab&cd<ef>g\"h'i";
 
         //Act
         a.AppendXmlAttributeValueEscaped(input);

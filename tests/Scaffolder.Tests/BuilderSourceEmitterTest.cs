@@ -4,21 +4,22 @@
 namespace JustTooFast.CodeGen.Scaffolder.Tests;
 
 [TestClass]
-public class BuilderGeneratorTest
+public class BuilderSourceEmitterTest
 {
     [TestMethod]
-    public void Generate_With2Attributes_ReturnAttributes()
+    public void EmitTo_With2Attributes_ReturnAttributes()
     {
         //Arrange
-        BidEntity entity = new() { Name = "Test" };
+        var entity = new EntityDefinition() { Name = "Test" };
         entity.Attributes.AddRange(new string[] {"Item1", "Item2"});
-        string targetNamespace = "MyNamespace";
+        var targetNamespace = "MyNamespace";
 
-        string expected =
+        var expected =
 @"using System;
 using System.Collections.Generic;
 
 namespace MyNamespace;
+
 public partial class TestBuilder
 {
     private readonly TestModel m_Test = new();
@@ -56,26 +57,30 @@ public partial class TestBuilder
 ";
 
         //Act
-        IGenerator target = new BuilderGenerator(entity, targetNamespace);
-        string actual = target.Generate();
+        var fmt = new Formatting(indentUnit: "    ", newLine: "\n");
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new BuilderSourceEmitter(entity, targetNamespace);
+        target.EmitTo(appender);
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void Generate_With2Entities_ReturnEntities()
+    public void EmitTo_With2Entities_ReturnEntities()
     {
         //Arrange
-        BidEntity entity = new() { Name = "Test" };
+        var entity = new EntityDefinition() { Name = "Test" };
         entity.Entities.AddRange(new string[] {"Item1", "Item2"});
-        string targetNamespace = "MyNamespace";
+        var targetNamespace = "MyNamespace";
 
-        string expected =
+        var expected =
 @"using System;
 using System.Collections.Generic;
 
 namespace MyNamespace;
+
 public partial class TestBuilder
 {
     private readonly TestModel m_Test = new();
@@ -125,26 +130,30 @@ public partial class TestBuilder
 ";
 
         //Act
-        IGenerator target = new BuilderGenerator(entity, targetNamespace);
-        string actual = target.Generate();
+        var fmt = new Formatting(indentUnit: "    ", newLine: "\n");
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new BuilderSourceEmitter(entity, targetNamespace);
+        target.EmitTo(appender);
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void Generate_With2AttributeSets_ReturnAttributeSets()
+    public void EmitTo_With2AttributeSets_ReturnAttributeSets()
     {
         //Arrange
-        BidEntity entity = new() { Name = "Test" };
+        var entity = new EntityDefinition() { Name = "Test" };
         entity.AttributeSets.AddRange(new string[] {"Item1", "Item2"});
-        string targetNamespace = "MyNamespace";
+        var targetNamespace = "MyNamespace";
 
-        string expected =
+        var expected =
 @"using System;
 using System.Collections.Generic;
 
 namespace MyNamespace;
+
 public partial class TestBuilder
 {
     private readonly TestModel m_Test = new();
@@ -202,26 +211,30 @@ public partial class TestBuilder
 ";
 
         //Act
-        IGenerator target = new BuilderGenerator(entity, targetNamespace);
-        string actual = target.Generate();
+        var fmt = new Formatting(indentUnit: "    ", newLine: "\n");
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new BuilderSourceEmitter(entity, targetNamespace);
+        target.EmitTo(appender);
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void Generate_With2EntitySets_ReturnEntitySets()
+    public void EmitTo_With2EntitySets_ReturnEntitySets()
     {
         //Arrange
-        BidEntity entity = new() { Name = "Test" };
+        var entity = new EntityDefinition() { Name = "Test" };
         entity.EntitySets.AddRange(new string[] {"Item1", "Item2"});
-        string targetNamespace = "MyNamespace";
+        var targetNamespace = "MyNamespace";
 
-        string expected =
+        var expected =
 @"using System;
 using System.Collections.Generic;
 
 namespace MyNamespace;
+
 public partial class TestBuilder
 {
     private readonly TestModel m_Test = new();
@@ -297,29 +310,33 @@ public partial class TestBuilder
 ";
 
         //Act
-        IGenerator target = new BuilderGenerator(entity, targetNamespace);
-        string actual = target.Generate();
+        var fmt = new Formatting(indentUnit: "    ", newLine: "\n");
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new BuilderSourceEmitter(entity, targetNamespace);
+        target.EmitTo(appender);
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void Generate_WithOneOfEach_ReturnAll()
+    public void EmitTo_WithOneOfEach_ReturnAll()
     {
         //Arrange
-        BidEntity entity = new() { Name = "Test2" };
+        var entity = new EntityDefinition() { Name = "Test2" };
         entity.Attributes.Add("Item1");
         entity.Entities.Add("Item2");
         entity.AttributeSets.Add("Item3");
         entity.EntitySets.Add("Item4");
-        string targetNamespace = "MyNamespace";
+        var targetNamespace = "MyNamespace";
 
-        string expected =
+        var expected =
 @"using System;
 using System.Collections.Generic;
 
 namespace MyNamespace;
+
 public partial class Test2Builder
 {
     private readonly Test2Model m_Test2 = new();
@@ -412,8 +429,11 @@ public partial class Test2Builder
 ";
 
         //Act
-        IGenerator target = new BuilderGenerator(entity, targetNamespace);
-        string actual = target.Generate();
+        var fmt = new Formatting(indentUnit: "    ", newLine: "\n");
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new BuilderSourceEmitter(entity, targetNamespace);
+        target.EmitTo(appender);
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);

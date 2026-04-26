@@ -23,7 +23,7 @@ public class BidParserTest
 
         //Act
         IBidParser target = new BidParser();
-        BidEntity actual = target.Parse(input);
+        EntityDefinition actual = target.Parse(input);
 
         //Assert
         Assert.AreEqual(expected, actual.Name);
@@ -43,12 +43,12 @@ public class BidParserTest
                 .ToString()
         };
 
-        BidEntity expected = new();
+        EntityDefinition expected = new();
         expected.Attributes.AddRange(new string[] {"Item1", "Item2", "Item3"});
 
         //Act
         IBidParser target = new BidParser();
-        BidEntity actual = target.Parse(input);
+        EntityDefinition actual = target.Parse(input);
 
         //Assert
         Assert.AreEqual(expected.Attributes.Count, actual.Attributes.Count);
@@ -75,12 +75,12 @@ public class BidParserTest
                 .ToString()
         };
 
-        BidEntity expected = new();
+        EntityDefinition expected = new();
         expected.Entities.AddRange(new string[] {"Item1", "Item2", "Item3"});
 
         //Act
         IBidParser target = new BidParser();
-        BidEntity actual = target.Parse(input);
+        EntityDefinition actual = target.Parse(input);
 
         //Assert
         Assert.AreEqual(expected.Attributes.Count, actual.Attributes.Count);
@@ -108,12 +108,12 @@ public class BidParserTest
                 .ToString()
         };
 
-        BidEntity expected = new();
+        EntityDefinition expected = new();
         expected.AttributeSets.AddRange(new string[] {"Item1", "Item2", "Item3"});
 
         //Act
         IBidParser target = new BidParser();
-        BidEntity actual = target.Parse(input);
+        EntityDefinition actual = target.Parse(input);
 
         //Assert
         Assert.AreEqual(expected.Attributes.Count, actual.Attributes.Count);
@@ -142,12 +142,12 @@ public class BidParserTest
                 .ToString()
         };
 
-        BidEntity expected = new();
+        EntityDefinition expected = new();
         expected.EntitySets.AddRange(new string[] {"Item1", "Item2", "Item3"});
 
         //Act
         IBidParser target = new BidParser();
-        BidEntity actual = target.Parse(input);
+        EntityDefinition actual = target.Parse(input);
 
         //Assert
         Assert.AreEqual(expected.Attributes.Count, actual.Attributes.Count);
@@ -177,7 +177,7 @@ public class BidParserTest
                 .ToString()
         };
 
-        BidEntity expected = new();
+        EntityDefinition expected = new();
         expected.Attributes.Add("Item1");
         expected.Entities.Add("Item2");
         expected.AttributeSets.Add("Item3");
@@ -185,7 +185,7 @@ public class BidParserTest
 
         //Act
         IBidParser target = new BidParser();
-        BidEntity actual = target.Parse(input);
+        EntityDefinition actual = target.Parse(input);
 
         //Assert
         Assert.AreEqual(expected.Attributes.Count, actual.Attributes.Count);

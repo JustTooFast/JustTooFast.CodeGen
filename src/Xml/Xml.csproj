@@ -12,21 +12,21 @@
 
   <ItemGroup>
     <ProjectReference Include="../Core/Core.csproj" />
-    <ProjectReference Include="../Scaffolder.Cli/Scaffolder.Cli.csproj" />
+    <ProjectReference Include="../Scaffolder.Cli/Scaffolder.Cli.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
-    <Exec Command="call $(ProjectDir)PreBuild.bat &quot;$(ProjectDir)&quot; &quot;JustTooFast.CodeGen.Xml&quot;" />
+  <Target Name="GenerateSources" BeforeTargets="CoreCompile" Condition="'$(OS)' == 'Windows_NT' and '$(DesignTimeBuild)' != 'true'">
+    <Exec Command="call $(ProjectDir)GenerateSources.bat &quot;$(ProjectDir)&quot; &quot;JustTooFast.CodeGen.Xml&quot;" />
   </Target>
 
-  <Target Name="PreBuild_unix" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Unix' ">
+  <Target Name="GenerateSources_Unix" BeforeTargets="CoreCompile" Condition="'$(OS)' == 'Unix' and '$(DesignTimeBuild)' != 'true'">
     <MakeDir Directories="$(ProjectDir)Output" />
-    <Exec Command="find &quot;$(ProjectDir)Output&quot; -maxdepth 1 -name &quot;*.gen.cs&quot; -type f -delete" />
-    <Exec Command="dotnet run --project &quot;$(ProjectDir)../Scaffolder.Cli/Scaffolder.Cli.csproj&quot; -- &quot;$(ProjectDir)Input&quot; &quot;$(ProjectDir)Output&quot; &quot;JustTooFast.CodeGen.Xml&quot;" />
+    <Exec Command="bash &quot;$(ProjectDir)CleanupGenerated.sh&quot; &quot;$(ProjectDir)&quot;" />
+    <Exec Command="dotnet run --no-build --project &quot;$(ProjectDir)../Scaffolder.Cli/Scaffolder.Cli.csproj&quot; -- &quot;$(ProjectDir)Input&quot; &quot;$(ProjectDir)Output&quot; &quot;JustTooFast.CodeGen.Xml&quot;" />
   </Target>
 
 </Project>

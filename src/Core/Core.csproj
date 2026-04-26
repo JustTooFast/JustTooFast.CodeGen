@@ -13,4 +13,8 @@
     <Compile Include="..\..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Naming/" />
+  </ItemGroup>
+
 </Project>

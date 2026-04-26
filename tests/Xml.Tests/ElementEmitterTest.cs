@@ -10,17 +10,17 @@ public class ElementEmitterTest
     public void EmitTo_WithName_ReturnWithName()
     {
         //Arrange
-        ElementBuilder builder = new ElementBuilder()
+        var builder = new ElementBuilder()
             .WithName("book");
         
-        string expected = "<book></book>";
+        var expected = "<book></book>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        ElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new ElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -30,18 +30,18 @@ public class ElementEmitterTest
     public void EmitTo_WithText_ReturnWithText()
     {
         //Arrange
-        ElementBuilder builder = new ElementBuilder()
+        var builder = new ElementBuilder()
             .WithName("price")
             .WithText("44.95");
         
-        string expected = "<price>44.95</price>";
+        var expected = "<price>44.95</price>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        ElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new ElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -51,19 +51,19 @@ public class ElementEmitterTest
     public void EmitTo_WithSingleAttribute_ReturnWithAttribute()
     {
         //Arrange
-        ElementBuilder builder = new ElementBuilder()
+        var builder = new ElementBuilder()
             .WithName("book")
             .WithAttribute(x => x
                 .WithName("id"));
         
-        string expected = "<book id=\"\"></book>";
+        var expected = "<book id=\"\"></book>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        ElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new ElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -73,21 +73,21 @@ public class ElementEmitterTest
     public void EmitTo_With2Attributes_ReturnWithAttributes()
     {
         //Arrange
-        ElementBuilder builder = new ElementBuilder()
+        var builder = new ElementBuilder()
             .WithName("test")
             .WithAttribute(x => x
                 .WithName("first"))
             .WithAttribute(x => x
                 .WithName("second"));
         
-        string expected = "<test first=\"\" second=\"\"></test>";
+        var expected = "<test first=\"\" second=\"\"></test>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        ElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new ElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -97,22 +97,22 @@ public class ElementEmitterTest
     public void EmitTo_WithChildElement_ReturnChildElement()
     {
         //Arrange
-        ElementBuilder builder = new ElementBuilder()
+        var builder = new ElementBuilder()
             .WithName("book")
             .WithElement(x => x
                 .WithName("title"));
         
-        string expected =
+        var expected =
 @"<book>
   <title></title>
 </book>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        ElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new ElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -122,14 +122,14 @@ public class ElementEmitterTest
     public void EmitTo_With2ChildElements_ReturnChildElements()
     {
         //Arrange
-        ElementBuilder builder = new ElementBuilder()
+        var builder = new ElementBuilder()
             .WithName("book")
             .WithElement(x => x
                 .WithName("author"))
             .WithElement(x => x
                 .WithName("title"));
         
-        string expected =
+        var expected =
 @"<book>
   <author></author>
   <title></title>
@@ -137,10 +137,10 @@ public class ElementEmitterTest
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        ElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new ElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -150,7 +150,7 @@ public class ElementEmitterTest
     public void EmitTo_WithNestedChildElements_ReturnChildElements()
     {
         //Arrange
-        ElementBuilder builder = new ElementBuilder()
+        var builder = new ElementBuilder()
             .WithName("catalog")
             .WithElement(x => x
                 .WithName("book")
@@ -165,7 +165,7 @@ public class ElementEmitterTest
                 .WithElement(y => y
                     .WithName("title")));
         
-        string expected =
+        var expected =
 @"<catalog>
   <book>
     <author></author>
@@ -179,10 +179,10 @@ public class ElementEmitterTest
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        ElementEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new ElementEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -193,10 +193,10 @@ public class ElementEmitterTest
     public void Validate_MissingName_ThrowException()
     {
         //Arrange
-        ElementBuilder builder = new();
+        var builder = new ElementBuilder();
 
         //Act
-        ElementEmitter target = new(builder);
+        var target = new ElementEmitter(builder);
     }
 
     [TestMethod]
@@ -204,13 +204,13 @@ public class ElementEmitterTest
     public void Validate_BothTextAndElement_ThrowException()
     {
         //Arrange
-        ElementBuilder builder = new ElementBuilder()
+        var builder = new ElementBuilder()
             .WithName("book")
             .WithText("XML Developer's Guide")
             .WithElement(x => x
                 .WithName("title"));
 
         //Act
-        ElementEmitter target = new(builder);
+        var target = new ElementEmitter(builder);
     }
 }

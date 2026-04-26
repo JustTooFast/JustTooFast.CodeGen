@@ -10,18 +10,18 @@ public class XmlSnippetEmitterTest
     public void EmitTo_WithElement_ReturnWithElement()
     {
         //Arrange
-        XmlSnippetBuilder builder = new XmlSnippetBuilder()
+        var builder = new XmlSnippetBuilder()
             .WithElement(x => x
                 .WithName("book"));
         
-        string expected = "<book></book>";
+        var expected = "<book></book>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        XmlSnippetEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new XmlSnippetEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -31,22 +31,22 @@ public class XmlSnippetEmitterTest
     public void EmitTo_With2Elements_ReturnWithElements()
     {
         //Arrange
-        XmlSnippetBuilder builder = new XmlSnippetBuilder()
+        var builder = new XmlSnippetBuilder()
             .WithElement(x => x
                 .WithName("book"))
             .WithElement(x => x
                 .WithName("book"));
         
-        string expected =
+        var expected =
 @"<book></book>
 <book></book>";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        XmlSnippetEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new XmlSnippetEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -57,9 +57,9 @@ public class XmlSnippetEmitterTest
     public void Validate_MissingElement_ThrowException()
     {
         //Arrange
-        XmlSnippetBuilder builder = new();
+        var builder = new XmlSnippetBuilder();
 
         //Act
-        XmlSnippetEmitter target = new(builder);
+        var target = new XmlSnippetEmitter(builder);
     }
 }

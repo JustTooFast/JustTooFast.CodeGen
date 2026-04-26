@@ -4,20 +4,21 @@
 namespace JustTooFast.CodeGen.Scaffolder.Tests;
 
 [TestClass]
-public class EmitterGeneratorTest
+public class EmitterSourceEmitterTest
 {
     [TestMethod]
-    public void Generate_WithBasicStructure_ReturnStructure()
+    public void EmitTo_WithBasicStructure_ReturnStructure()
     {
         //Arrange
-        BidEntity entity = new() { Name = "Test" };
-        string targetNamespace = "MyNamespace";
+        var entity = new EntityDefinition() { Name = "Test" };
+        var targetNamespace = "MyNamespace";
 
-        string expected =
+        var expected =
 @"using System;
 using JustTooFast.CodeGen;
 
 namespace MyNamespace;
+
 public partial class TestEmitter : IEmitter
 {
     private readonly TestModel m_Test;
@@ -36,8 +37,11 @@ public partial class TestEmitter : IEmitter
 ";
 
         //Act
-        IGenerator target = new EmitterGenerator(entity, targetNamespace);
-        string actual = target.Generate();
+        var fmt = new Formatting(indentUnit: "    ", newLine: "\n");
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new EmitterSourceEmitter(entity, targetNamespace);
+        target.EmitTo(appender);
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);

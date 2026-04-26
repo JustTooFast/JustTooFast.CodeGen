@@ -12,17 +12,17 @@ public class AttributeEmitterTest
     public void Generate_WithName_ReturnNameAndEmptyValue()
     {
         //Arrange
-        AttributeBuilder builder = new AttributeBuilder()
+        var builder = new AttributeBuilder()
             .WithName("test");
         
-        string expected = "test=\"\"";
+        var expected = "test=\"\"";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        AttributeEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new AttributeEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -32,18 +32,18 @@ public class AttributeEmitterTest
     public void Generate_WithNameAndValue_ReturnNameAndValue()
     {
         //Arrange
-        AttributeBuilder builder = new AttributeBuilder()
+        var builder = new AttributeBuilder()
             .WithName("myName")
             .WithValue("myValue");
         
-        string expected = "myName=\"myValue\"";
+        var expected = "myName=\"myValue\"";
 
         //Act
         var fmt = new Formatting(newLine: "\n");
-        IAppender appender = new StringBuilderAppender(formatting: fmt);
-        AttributeEmitter target = new(builder);
+        var appender = new StringBuilderAppender(formatting: fmt);
+        var target = new AttributeEmitter(builder);
         target.EmitTo(appender);
-        string actual = appender.ToString();
+        var actual = appender.ToString();
 
         //Assert
         Assert.AreEqual(expected, actual);
@@ -54,9 +54,9 @@ public class AttributeEmitterTest
     public void Validate_MissingName_ThrowException()
     {
         //Arrange
-        AttributeBuilder builder = new();
+        var builder = new AttributeBuilder();
 
         //Act
-        AttributeEmitter target = new(builder);
+        var target = new AttributeEmitter(builder);
     }
 }

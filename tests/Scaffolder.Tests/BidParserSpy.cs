@@ -9,11 +9,11 @@ public class BidParserSpy : IBidParser
     public int CallsTo_Parse
     { get; set; }
 
-    public BidEntity Parse(File file)
+    public EntityDefinition Parse(File file)
     {
         CallsTo_Parse++;
 
-        BidEntity entity = new();
+        EntityDefinition entity = new();
 
         if (file.Path.Contains("First"))
             entity.Name = "First";
