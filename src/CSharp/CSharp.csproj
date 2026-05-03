@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>JustTooFast.CodeGen.CSharp</AssemblyName>
+    <RootNamespace>JustTooFast.CodeGen.CSharp</RootNamespace>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Core/Core.csproj" />
+    <ProjectReference Include="../Scaffolder.Cli/Scaffolder.Cli.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
+    <Exec Command="call $(ProjectDir)PreBuild.bat &quot;$(ProjectDir)&quot; &quot;JustTooFast.CodeGen.CSharp&quot;" />
+  </Target>
+
+  <Target Name="PreBuild_unix" BeforeTargets="PreBuildEvent" Condition=" '$(OS)' == 'Unix' ">
+    <MakeDir Directories="$(ProjectDir)Output" />
+    <Exec Command="find &quot;$(ProjectDir)Output&quot; -maxdepth 1 -name &quot;*.gen.cs&quot; -type f -delete" />
+    <Exec Command="dotnet run --project &quot;$(ProjectDir)../Scaffolder.Cli/Scaffolder.Cli.csproj&quot; -- &quot;$(ProjectDir)Input&quot; &quot;$(ProjectDir)Output&quot; &quot;JustTooFast.CodeGen.CSharp&quot;" />
+  </Target>
+
+</Project>
